@@ -1,5 +1,11 @@
-### Hi there 👋
 
+#Introduction
+---
+* 이름 : 박나영
+* 세종대학교 컴퓨터공학과 재학 중
+* 깃허브 아이디는 레이몬드광렬입니다
+<br>
+과연 내가 원하는 걸 할 수 있을까?😥
 <!--
 **Raymondgwangryeol/Raymondgwangryeol** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
