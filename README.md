@@ -1,7 +1,7 @@
 
 <h2>#Introduction</h2>
 
-<li style="list-style-type:none;">
+<li style="list-style:none;">
 <ul>✔ 네트워크, 정보보안에 관심이 있는 일개 대학생입니다</ul>
 <ul>✔ 찍먹중</ul>
 <ul>✔ 깃허브 아이디는 레이몬드광렬입니다</ul>
