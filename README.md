@@ -1,13 +1,13 @@
 
-<h2>#Introduction</h2>
+<h2>📢Introduction</h2>
 
-<li>
-<ul style="list-style:none;">✔ 네트워크, 정보보안에 관심이 있는 일개 대학생입니다</ul>
-<ul style="list-style:none;">✔ 찍먹중</ul>
-<ul style="list-style:none;">✔ 깃허브 아이디는 레이몬드광렬입니다</ul>
-</li>
+<ul>
+  <li>네트워크, 정보보안에 관심이 있는 일개 대학생입니다</li>
+  <li>찍먹중</li>
+  <li>깃허브 아이디는 레이몬드광렬입니다</li>
+</ul>
 <br>
-<h2>#Goal</h2>
+<h2>🎯Goal</h2>
 
 <b>'나의 종착지는?'</b>
 <br>
