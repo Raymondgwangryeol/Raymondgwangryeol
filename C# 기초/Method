@@ -1,0 +1,120 @@
+// 예제로 배우는 C# 프로그래밍 참고
+
+using System;
+namespace Basic
+{
+    class Method_13
+    {
+        /*
+           * Pass by Value *
+              메서드에 인수 전달시, 디폴트로 값을 복사해서 전달. 메서드가 끝나고 함수가 리턴된 후에도 원래 값 그대로 유지
+
+              Class Program
+              {
+              private void Calculate(int a)
+              {
+                  a *= 2;
+              }
+
+              static void Main(string[] args)
+              {
+                  Program p = new Program();
+
+                  int val = 100;
+                  p.Calculate(val);  
+                  // val는 그대로 100
+                  //리턴해서 값을 변수에 집어넣지 않는 한 변하지 않음
+              }
+
+
+
+              * Pass by Reference *
+                  메서드 인자로 레퍼런스를 전달하고 싶다면 ref 키워드를 쓰세요
+                      - ref를 사용하면 메서드 내에서 변경된 값이 리턴 후에도 유효하답니다~
+                  
+                  ref와 비슷한 얘로 out 키워드가 있다.
+                    - 메서드 내에서 그 값을 반드시 지정하여 전달!
+
+                  ref vs out
+                    ref는 해당 변수가 사전에 초기화되어야 하지만, out은 사전에 변수를 초기화 할 필요는 없다.
+          }
+           */
+
+        //ref 정의
+        static double GetData(ref int a, ref double b)
+        {
+            return (++a * ++b);
+        }
+
+        //out 정의(Overloading)
+        static bool GetData(int a, int b, out int c, out int d)
+        {
+            c = a + b;
+            d = a - b;
+            return true;
+        }
+        static void Main(string[] args)
+        {
+
+            //ref 사용, 초기화 필요
+            int x = 1;
+            double y = 1.0;
+            double ret = GetData(ref x, ref y);
+
+            // out 사용, 초기화 할 필요 없음
+            int c, d;
+            bool bret = GetData(10, 20, out c, out d);
+
+            /*
+             * params *
+                파라미터의 갯수를 미리 알 수 없는 경우 해당 키워드를 쓴다.
+                파라미터들 중 반드시 하나만 존재해야 하며, 맨 마지막에 위치해야 한다.
+                //메서드
+                int Calc(params int[] values)
+
+                //사용
+                int s = Calc(1,2,3,4);
+                s = Calc(6,7,8,9,10,11);
+             
+              
+             # C# 4.0 version #
+             * Named 파라미터 * 
+                메서드에 파라미터 전달 시, 위치와 상관 없이 파라미터명을 지정하여 전달할 수 있게 되었다.
+                ex)  Method(name: "John", age: 10, score: 90);
+
+             * Optional 파라미터 *
+                어떤 메서드와 파라미터가 디폴트 값을 갖고 있다면, 메서드 호출 시 디폴트 값 생략해도 됨.
+                반드시 맨 마지막에 놓여져야 함.
+
+                class Program
+                {
+                    // Optional 파라미터: calcType
+                    int Calc(int a, int b, string calcType = "+") // 맨 마지막에 Optional parameter가 들어갔다
+                    {
+                        switch (calcType)
+                        {
+                            case "+":
+                                return a + b;
+                            case "-":
+                                return a - b;
+                            case "*":
+                                return a * b;
+                            case "/":
+                                return a / b;
+                            default:
+                                throw new ArithmeticException();
+                        }
+                    }
+
+                    static void Main(string[] args)
+                    {
+                        Program p = new Program();
+                        int ret = p.Calc(1, 2); //생략 가능
+                        ret = p.Calc(1, 2, "*");
+                }
+            *
+             */
+
+        }
+    }
+}
