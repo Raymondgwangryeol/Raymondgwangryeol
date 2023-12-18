@@ -1,0 +1,89 @@
+// 예제로 배우는 C# 프로그래밍 참고
+
+using System;
+using System.Data.SqlClient;
+
+/*
+ * throw *
+  - try문에서 Exception 발생 했는데, catch 문에서 일단 잡으면, Exception을 이미 처리된 것으로 간주됨. (한 번 잡으면 끝임)
+  - catch 문에서 기존 Exception을 다시 상위 호출자로 올리고 싶을 때 throw를 씀.
+
+ * throw문 쓰는 경우 3가지 *
+    (1) throw문 다음에 catch에서 전달받은 Exception 객체 쓰는 경우 - 하지 마라
+        throw ex와 같이 catch에서 전달받은 인자를 다시 사용하는 경우. 예외 정보를 사골 국 우려먹을 수 있지만, Stack Trace 정보가 리셋되버림.
+    
+    (2) throw 다음 새 Exception 객체를 생성해서 전달
+        throw new MyExpection(); 이런식으로 new를 사용해 새로운 객체를 만들고 던지면 된다.
+        하지만 잘못해서 신나게 던질까 말까 하다가 (특히 중첩 예외처리 시) 원래 Expection이 뭐였는지 알 수 없을수도 있다.
+        따라서 이런 방식을 쓸 때는 catch에서 전달받은 예외를 같이 인자로 던져주면 된다.(InnerExpection 으로)
+        throw new MyExpection(msg, ex); 이렇게
+
+    (3) throw 문만 사용
+        throw; 와 같이 아무런 Exception 개체 없이 던지기만 사용할 수 있다.
+        catch 에서 잡은 Exception 객체를 그대로 상위 호출 함수에게 전달하는 일을 함(rethrow)
+        에러가 다른 메서드에서 발생 시 에러 발생 위치를 포함하지만, 자기와 동일한 메서드에서 에러 발생 시 에러 발생 위치를 포함하지 않는다.
+
+
+     try
+            {
+                // 실행 문장들
+                Step1();
+                Step2();
+                Step3();
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                // 새로운 Exception 생성하여 throw
+                throw new MyException("Invalid index", ex); 
+            }
+            catch (FileNotFoundException ex)
+            {
+                bool success = Log(ex);
+                if (!success)
+                {
+                    // 기존 Exception을 throw
+                    throw ex; // throw ex 이후부터의 콜스택 정보만을 전달, 이전 콜스택 제거
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex);
+                // 발생된 Exception을 그대로 호출자에 전달
+                throw;
+            }
+
+ */
+
+namespace Basic
+{
+    public class Exception_10
+    {
+        static void Main(string[] args)
+        {
+            string connStr = "Data Source=(local);Integrated Security=true;";
+            string sql = "SELECT COUNT(1) FROM sys.objects";
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                object count = cmd.ExecuteScalar();
+                Console.WriteLine(count);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally // 에러가 없어도 실행 된다.
+            {
+                if (conn != null &&
+                    conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+    }
+}
