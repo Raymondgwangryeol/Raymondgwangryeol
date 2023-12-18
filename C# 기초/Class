@@ -1,0 +1,65 @@
+// 예제로 배우는 C# 프로그래밍 참고
+
+using System;
+
+namespace Basic
+{
+    public class Class_11
+    {
+        public class MyCustomer
+        {
+            // 필드
+            private string name;
+            private int age;
+
+            // 이벤트
+            // 특정한 일이 일어났음을 외부의 이벤트 가입자들에게 알려주는 기능
+            public event EventHandler NameChanged; // EventHandler: delegate 정의 없이 한 번에 이벤트를 사용할 수 있게 도와주는 c# 내부 delegate
+                                                   // delegate(대리자): 메서드를 대신 호출해주는 기법. 약간 메서드 입맛대로 꾸미기(???)
+                                                   // public delegate void MyDelegate(string msg); -> 대리자 선언하고
+                                                   // public static void MethodA(string msg) {Console.WriteLine("param of MethodA : " + msg);} -> 대리자 참조 메서드 생성하고
+                                                   //MyDelegate del; del = new MyDelegate(MethodA); del("Method A Call"); -> 대리자 변수 선언하고 참조 메서드 인스턴스에 넣어 사용
+
+            // 생성자 (Constructor)
+            public MyCustomer()
+            {
+                name = string.Empty;
+                age = -1;
+            }
+
+            // 속성
+            public string Name
+            {
+                get { return this.name; }
+                set
+                {
+                    if (this.name != value)
+                    {
+                        this.name = value;
+                        if (NameChanged != null)
+                        {
+                            NameChanged(this, EventArgs.Empty); // 이벤트 발생
+                        }
+                    }
+                }
+            }
+            public int Age  // private한 변수들에 접근하는 함수들(캡슐화, 무결성 관련)
+            {
+                get { return this.age; } // 값을 가져온다
+                set { this.age = value; } // 값을 설정한다
+            }   //일단 this.age값을 가져와서 setting함
+
+            // 메서드
+            public string GetCustomerData()
+            {
+                string data = string.Format("Name: {0} (Age: {1})",
+                            this.Name, this.Age);
+                return data;
+            }
+        }
+        static void Main(string[] args)
+        {
+
+        }
+    }
+}
