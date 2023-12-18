@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Basic
+{
+    class Valuable_02
+    {
+        static void Main(string[] args)
+        {
+            const int val = 10; // 상수 선언. 컴파일 시 상수값 결정
+            //readonly int val로도 선언 가능. 클래스 생성자에서 값 지정 가능. 런타임시 값 결정
+            
+            // bool
+            // 논리값 자료형(true/false), 1비트.
+            /*
+             * C#에서는 조건식이 논리값으로 반환된다.
+             *      => if문, while문 똑같이 적용!!!
+             * C에서는 참이면 1, 거짓이면 0
+             * C#에서는 참이면 무조건 true, 아니면 무조건 false. 0,1 이딴거 없음. 컴파일이 안 돼 버림
+             */
+
+            bool b = true;
+
+            // DateTime
+            DateTime dt = new DateTime(2023, 12, 16, 01, 04, 0); // 2023-12-16 오전 1:04:00
+            System.Console.WriteLine(dt);
+
+            // Null
+            // 정수나 날짜, bool 같은 Value Type은 일반적으로 null을 가질 수 없음.
+            // 2.0버전 부터 이런 애들도 Null 값을 가질 수 있게 되었는데, 이걸 Nullable Type라 부름.
+
+            int? inull = null; //자료형 뒤에 ? 붙이면 Nullable type이 됨.
+            //int 값에 Nullable type값 할당하기
+            inull = 10;
+            int k = inull.Value;
+            System.Console.WriteLine(k);
+        }
+    }
+}
+
+// 자료형은 다른 언어들과 거의 비슷함.
+
+// 디폴트 리터럴 타입
+// 123 int,
+// 12.3 double, D suffix
+// "a" string,
+// 'a' char,
+// true bool
+
+/*
+ char는 C처럼 숫자로(아스키 코드)취급되는 게 아니라, 아예 문자 자료형으로 취급함.(유니코드)
+ 즉, char a=65;가 안 됨.
+ 위 처럼 하고싶다면, byte 자료형을 써야 함.
+ char는 2바이트 문자 자료형, byte는 1바이트 숫자 자료형
+
+ 단, char형식의 데이터를 ushort, int, uint등의 숫자형으로 명시적 변환할 수는 있음.
+*/
+
+/*
+ * 새로운 자료형들
+ * bool
+ * sbyte
+ * decimal suffix M
+ * string
+ * Object
+ */
+
+//sbyte
+// byte(0~255)의 부호형. -128~127의 범위를 가짐.
+
+//decimal
+//long보다 더 한 단계 위의 범위. 16바이트 짜리
+// +) 참고로 c에서 long은 4바이트, c#에서는 8바이트.
+
