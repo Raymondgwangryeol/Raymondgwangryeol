@@ -1,0 +1,76 @@
+// 예제로 배우는 C# 프로그래밍 참고
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Basic
+{
+    public class Using_enum_07
+    {
+        public enum Category // enum 타입 정의
+        {
+            Cake,  // 0을 가짐
+            IceCream,  //1을 가짐
+            Bread  // 2를 가짐
+        }
+        // Category.Cake 이런 식으로 씀
+        //enum 변수 <->  숫자형 타입 data
+
+        //[Flag]
+        enum City
+        {
+            Seoul, // 0
+            Daejun, // 1
+            Busan = 5, // 5
+            Jeju = 10 // 10
+        }
+
+        static void Main(string[] args)
+        {
+            City myCity; // 같은 클래스 안에서 참조
+
+            // enum 타입에 값 대입
+            myCity = City.Seoul;
+            Console.WriteLine(myCity);
+
+            //enum -> int 변환
+            int CityValue = (int)City.Busan;
+            Console.WriteLine(CityValue);
+
+            if (myCity == City.Seoul) Console.WriteLine("Welcome to Seoul");
+
+            // or 연산자로 한 enum 변수에 다중값(flag) 부여 가능
+            // and 연산자로 enum 변수가 특정 멤버를 포함하고 있는지 체크 가능
+
+            City test;
+            test = City.Seoul | City.Jeju;
+
+            if (test != 0)
+            {
+                if (test.HasFlag(City.Seoul)) // HasFlag()로 부여한 플래그 체크
+                {
+                    Console.WriteLine(test.ToString()); //ToString() :  인스턴스의 값을 해당하는 문자로 변환
+                }
+            }
+
+
+            /*
+             - ?? 연산자
+                왼쪽 피 연산자의 값이 NULL인 경우 뒤의 피연산자 값을 리턴, 아니면 앞에 거 리턴
+
+            */
+            int? i = null; //Nullable 정수
+            i = i ?? 0; //i가 null이어서 0을 리턴한다
+            Console.WriteLine(i);
+
+            string s = null;
+            s = s ?? string.Empty; // string.Empty = 길이가 0인 문자열
+            Console.WriteLine(s); // s가 null이어서 빈 문자열을 출력한다
+
+
+        }
+    }
+}
