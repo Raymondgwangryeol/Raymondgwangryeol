@@ -1,0 +1,49 @@
+// 예제로 배우는 C# 프로그래밍 참고
+
+using System;
+using System.Collections.Generic;
+
+namespace Basic
+{
+    class Loop_08
+    {
+        
+
+        static void Main(string[] args)
+        {
+            // * foreach 반복 구문 *
+
+            // 배열이나 컬렉션에 주로 사용. 각 요소를 하나씩 꺼내와서 루프 돌릴 때 사용.
+            // for가 성능은 좀 더 좋을 수 있음. 근데 사실 for나 foreach나 큰 차이 없음
+            // foreach가 훨씬 간결함.
+            //c#에서 foreach가 배열 루프에 최적화를 거쳐 거의 for문이랑 동급 수준이므로, foreach 쓰는 것을 권장
+
+            string[,,] arr = new string[,,] { { { "1", "2" }, { "11", "22" } }, { { "3", "4" }, { "33", "44" } } };
+
+            //foreach문
+            foreach (var s in arr)
+            {
+                Console.WriteLine(s);
+            }
+            //for문이었으면 3중 돌려야 함
+
+
+            //예제
+            List<char> keyList = new List<char>(); //List=>Generic(멤버변수의 타입을 미리 결정하지 않고 사용)이나 구조체로 간주됨. <>사이에 자료형을 선언해줘야 함
+            // 동적으로 크기 조절이 되는게 ㄹㅇ 강점. 크기에 대해 신경 안 써도 됨.
+            // 선형 리스트에 필요한 key도 사용 안 함.
+            ConsoleKeyInfo key; // 키의 문자와 shift,alt,ctrl 보조키 포함해서 정보 리턴
+            do
+            {
+                key = Console.ReadKey(); //.Readkey() == scanf()
+                keyList.Add(key.KeyChar); //알파벳, ctrl, 숫자키, enter키 tap키 get 가능. 그냥 쭈우욱 받음. textbox에 이용됨. 약간 비밀번호 입력 느낌?
+            } while (key.Key != ConsoleKey.Q); // Q가 아니면 계속 입력 받기
+
+            Console.WriteLine();
+            foreach (char ch in keyList) // 리스트 루프
+            {
+                Console.Write(ch);
+            }
+        }
+    }
+}
