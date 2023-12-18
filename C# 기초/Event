@@ -1,0 +1,21 @@
+/*
+  * Event *
+    클래스 내에 특정한 일(event)가 일어남을 외부의 이벤트 가입자(Subscriber)들에게 알려주는 기능.
+    event 키워드 사용, 필드(내부 데이터)처럼 취급됨.
+ */
+
+using System;
+
+namespace Basic
+{
+    class Event_14
+    {
+        static void Main(string[] args)
+        {
+
+        }
+    }
+}
+
+
+// this는 확장 메서드의 첫 번째 매개 변수에 대한 한정자로도 사용됩니다.
