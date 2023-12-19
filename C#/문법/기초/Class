@@ -63,3 +63,123 @@ namespace Basic
         }
     }
 }
+
+
+/*
+** 접근 제한자 **
+출처 url: https://bit.ly/3RtXmCn
+    1. public
+    public으로 선언된다면 어느 곳에서든 자유롭게 사용될 수 있음. 아무런 제한을 받지 않고 원하는 곳에서 사용됩
+    
+    2. private
+    private으로 선언되면 약간의 제한을 갖게 됨. 예를 들어 어떤 클래스에 변수들이 private으로 선언된 경우 해당 클래스에서만 접근이 가능함.
+    
+    3. internal
+    internal로 선언된다면 해당 프로젝트에 public처럼 사용됨. 자신의 프로젝트에서 내부적으로 사용된다는 뜻.
+    이는 외부에서 사용될 가능성이 있는 프로젝트에서 유용하게 사용됨.
+    해당 프로젝트의 사용자가 굳이 몰라도 되는 정보를 감출 수 있음. 클래스를 생성할 경우 아무런 접근제한자를 선언하지 않았다면, 기본값은 internal
+    단, 클래스 내부에 Nested 클래스를 선언하는 것과 같이 Nested Type을 선언하면 디폴트로 private
+    
+    4. protected
+    protected로 선언된다면 상속받은 자식의 클래스에서만 사용 가능
+
+클래스 멤버는 5가지의 접근 제한자를 (public, internal, private, protected, protected internal) 모두 가질 수 있다.
+하지만, 구조체(struct) 멤버는 상속이 되지 않으므로 3가지의 접근 제한자만 (public, internal, private) 가질 수 있다.
+
+보통 클래스와 구조체는 네임스페이스 바로 밑에 선언
+
+*/
+
+/*
+** 클래스 상속 **
+ 상속 받은 클래스(파생 클래스)는 부모 클래스의 public, protected 데이터 및 메소드를 사용할 수 있음.
+ 정의 방법은 클래스명 뒤에 : 찍고 부모 클래스 명 적으면 됨. 부모 클래스는 1개만 가질 수 있음.
+
+ // 베이스 클래스
+public class Animal
+{
+   public string Name { get; set; }
+   public int Age { get; set; }
+}
+
+// 파생클래스
+public class Dog : Animal
+{       
+   public void HowOld() 
+   {
+      // 베이스 클래스의 Age 속성 사용
+      Console.WriteLine("나이: {0}", this.Age);
+   }
+}
+
+public class Bird : Animal
+{       
+   public void Fly()
+   {
+      Console.WriteLine("{0}가 날다", this.Name);
+   }
+}
+*/
+
+/*
+추상 클래스(Abstract Class)
+
+말 그대로 추상적인 클래스. new를 써서 직접 객체를 생성할 수 없음.
+추상 클래스 안에서                                                                                                                                                                                                                 추상 클래스에서 파생된 클래스 안에서 반드시 해당 멤버를 구현해 줘야 함.
+추상 클래스 제한자: abstract
+추상 클래스의 파생 클래스: override 사용
+
+public abstract class PureBase
+{
+   // abstract C#키워드 
+   public abstract int GetFirst();
+   public abstract int GetNext();   
+}
+
+public class DerivedA : PureBase
+{
+   private int no = 1;
+
+   // override C#키워드 
+   public override int GetFirst()
+   {
+      return no;
+   }
+
+   public override int GetNext()
+   {
+      return ++no;
+   }
+}
+*/
+
+/*
+ *as, is 연산자*
+
+    - as: 객체(object)를 지정된 클래스 타입으로 변환. 변환 성공시 해당 클래스 타입으로 캐스팅, 실패시 null 반환.
+    - is: 특정 객체가 해당 클래스 타입이나 인터페이스를 가지고 있는지 확인
+    class MyBase { }
+        class MyClass : MyBase { }
+    
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                MyClass c = new MyClass();
+                new Program().Test(c); //Test()를 실행하는 코드.
+            }
+    
+            public void Test(object obj)
+            {
+                Console.Write("Test Method");
+                // as 연산자
+                MyBase a = obj as MyBase;
+    
+                // is 연산자
+                bool ok = obj is MyBase; //true
+    
+                // Explicit Casting
+                MyBase b = (MyBase)obj;
+            }
+        }
+*/
