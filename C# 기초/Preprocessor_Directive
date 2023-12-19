@@ -1,0 +1,106 @@
+using System;
+
+/*
+# 전처리기(Preprocessor Directive)
+    - 컴파일이 시작되기 전, 컴파일러에게 틀별한 명령을 미리 처리하도록 지시
+    - #로 시작, 한 라인당 한 개의 전처리기 명령 사용
+    - 세미콜론을 붙이지 않는다
+    - 선언된 파일 안에서만 효력이 있다.(여러 파일에 동일한 전처리를 하고 싶으면 각각 똑같이 정의해야 함)
+*/
+
+/*
+ * 조건별 컴파일
+    - 자주 사용됨. #define, #if, #else, #endif가 있음.
+    - #define: 매크로 정의. #define PI 3.14 이런식으로 하면 앞으로 PI는 3.14로 쓸 수 있음.
+
+    #define TEST_ENV  //#define PROD_ENV
+
+    using System;
+
+    namespace App1
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                bool verbose = false;
+                // ...
+
+        #if (TEST_ENV) // TEST_ENV가 선언되어 있으면 아래 실행하기
+                    Console.WriteLine("Test Environment: Verbose option is set.");
+                    verbose = true;
+        #else // TEST_ENV가 선언 안 되어있는 경우
+                    Console.WriteLine("Production");
+        #endif // 조건부 컴파일 끝을 알리는 전처리
+
+                    if (verbose)
+                    {
+                        //....
+                    }
+                }
+            }
+        }
+
+ * Region(지역, 부분) 전처리기 지시어
+    -코드 블럭을 논리적으로 묵을 때 유용.
+        -> public 메소드들만 묶어서 [Public Methods]라고 명명한다던가...
+    -복잡하고 긴 클래서 개념적으로 뭈을 때 매우 유용
+    -#region으로 열고 #endregion으로 닫아줘야 함
+    -Nested Region 가능
+        -> Visual studio에서는 좌측에 +/-로 표시되어 Expand/Collapse를 할 수 있는 기능 제공
+
+        class ClassA
+        {
+            #region Public Methods        
+            public void Run() { }
+            public void Create() { }        
+            #endregion
+
+            #region Public Properties
+            public int Id { get; set; }
+            #endregion
+
+            #region Privates
+            private void Execute() { }
+            #endregion
+        }
+
+ * Progma 전처리기 지시어
+    개발자가 임의로 지정하여 사용할 수 없고, 컴파일러 제작업체 고유의 지시어. 즉, 컴파일러에 따라 지원 #Progma가 다름.
+
+ * 기타 전처리기 지시어
+    #undef: 지정된 symbol 해제(define과 반대)
+    #elif: else if
+    
+    특정 컴포넌트가 특정 환경에서 실행되지 않아야 할 때 이를 알리고자 사용
+    #error: 전처리시 Preprocessing중단, 에러메시지 출력
+
+    #warning: 경고 메시지 출력, Preprocessing은 계속 함
+
+    // #error 예제 --------------------------------------
+    // 여러 파일들을 병합 후 컴파일 해야 하는 경우 유용할 수 있음
+    #define STANDARD_EDITION
+    #define ENTERPRISE_EDITION
+
+    #if (STANDARD_EDITION && ENTERPRISE_EDITION)
+    #error Use either STANDARD or ENTERPRISE edition. 
+    #endif
+
+
+    // #warning 예제 -----------------------------------
+    #if (!ENTERPRISE_EDITION)
+    #warning This class should be used in Enterprise Edition
+    #endif
+
+
+*/
+namespace Basic
+{
+    class Directive
+    {
+        static void Main(string[] args)
+        {
+
+        }
+    }
+}
