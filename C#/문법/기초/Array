@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Basic
+{
+    class Array_03
+    {
+        static void Main(string[] args)
+        {
+            // 각 차원별 배열 크기가 동일함.
+            // 1차 배열 선언
+            string[] d1 = new string[5];
+            string[] d1_direct = { "일", "이", "삼" };
+
+            // 2차 배열 선언
+            // string[,] d2 = {{},{}}
+
+            // 3차 배열 선언
+            // string[,,] d3
+
+            // 가변 배열 Jagged Array
+            // 첫 번째 차원 크기는 정해주고, 그 이상 차원은 런타임시 동적으로 서로 다른 크기 배열 지정 가능
+            // 물론 자료형은 동일해야 함
+            int[][] A = new int[3][];
+            // 요소당 서로 다른 크기 배열 할당
+            A[0] = new int[2];
+            A[1] = new int[3];
+
+            //C# 배열은 .NET 프레임워크의 System.Array에서 파생됨
+            //System.Array의 메서드, 프로퍼티 사용 가능
+            System.Console.WriteLine(d1_direct.Length); //배열 사이즈 구하기
+            
+            
+        }
+    }
+}
