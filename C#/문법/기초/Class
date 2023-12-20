@@ -15,7 +15,7 @@ namespace Basic
             // 이벤트
             // 특정한 일이 일어났음을 외부의 이벤트 가입자들에게 알려주는 기능
             public event EventHandler NameChanged; // EventHandler: delegate 정의 없이 한 번에 이벤트를 사용할 수 있게 도와주는 c# 내부 delegate
-                                                   // delegate(대리자): 메서드를 대신 호출해주는 기법. 약간 메서드 입맛대로 꾸미기(???)
+                                                   // delegate(대리자): 메서드를 대신 호출해주는 기법. 약간 메서드를 위한 포인터 변수?
                                                    // public delegate void MyDelegate(string msg); -> 대리자 선언하고
                                                    // public static void MethodA(string msg) {Console.WriteLine("param of MethodA : " + msg);} -> 대리자 참조 메서드 생성하고
                                                    //MyDelegate del; del = new MyDelegate(MethodA); del("Method A Call"); -> 대리자 변수 선언하고 참조 메서드 인스턴스에 넣어 사용
