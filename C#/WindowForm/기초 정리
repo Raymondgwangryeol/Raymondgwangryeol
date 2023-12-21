@@ -1,0 +1,395 @@
+// ctrl+f로 필요한거 찾아 참고하기
+
+
+/*
+ #CheckBox#
+
+ Chacked 속성
+ - false: 디폴트가 선택 안 된거
+ - true: 디폴트가 선택 된거
+
+ ChackState 속성 -> 3가지 속성 나타내고 싶을 때
+ - Unchecked
+ - Checked
+ - Intermidate -> 부분적으로 선택
+               -> 이용 약관 전체 동의 같은 놈!!!!!!
+               -> 조건식으로 새끼 체크박스들이 일부만 true면 검은색 꽉찬 네모 나오고(intermidate) 모두 true면 우리가 아는 체크 표시 나오게 할 수 있음(checked)
+ */
+
+/*
+ #CheckList#
+
+ 다수의 CheckBox들이 ListBox안에 들어있는 컨트롤
+
+ item 추가하려면,
+ 1. 속성창에서 맨 아래에 있는 항목 편집..  눌러서 하기
+ 2. CheckedListBox1.Items.Add(아이템)
+
+ 더블클릭하면 기본으로 SelectedIndexChanged() event handler가 작성됨.
+    => CheckedListBox 내부의 어떤 체크박스들이 선택될 때 발생
+
+ 체크박스의 인텍스를 보고싶다면?
+    CheckedListBox.SelectedIndex;
+
+ 해당 체크박스의 내용을 object형으로 받아보고 싶다면?
+    CheckedListBox.SelecedItem;
+        =>참고로 object형이라 모든 데이터 타입으로 변환할 수 있다. 예를 들어 ToString()해서 문자열로 변환해서 쓴다던지....
+
+*/
+
+
+/*
+ #ComboBox#
+
+ DropDownStyle 속성 => 3가지 모드가 있다.
+    -Simple ('v' <-이 모양 조차 없음)
+    -DropDown (우리가 흔히 아는 그 모양)
+    -DropDownList (카테고리명? 만 회색)
+
+ 윈도우 폼이 로드 될 때 Form1_Load 핸들러로 콤보박스도 같이 초기화 시킬 수 있다.
+    - 배열이나 리스트, 다른 Collection들의 요소들을 콤보박스에 추가할 수 있다!!
+        => Items.AddRange()
+    - 단일 요소를 추가하려면?
+        => Items.Add();
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+        string[] data = {"A","B","C","D"];
+        comboBox1.Items.AddRange(data); // 덮어쓰기 아님 추가임
+        comboBox1.SelectedIndex = 1; // 처음 선택값 지정. 첫 번째로 B가 선택됨!
+
+  SelectedIndexChanged 이벤트는 사용자가 컨테이너 내부 아이템들 중에서 다른 아이템을 선택했을 때 발생하는 이벤트
+       
+  데이터 바인딩
+    - 데이터를 db에서 가져와 넣을 경우,
+        => id, name 속성으로 콤보박스를 만들고 싶은데, 콤보박스에 있는 name명을 클릭하면 내용이 id가 나오는 걸 만들고 싶다!
+            -> 아래처름 따로따로 지정 가능!
+            comboBox1.DisplayMember = "name";  // 콤보박스에 직접 보이는 내용들
+            comboBox1.ValueMember = "id"; // 아이템 선택 시 속성값
+            comboBox1.DataSource = GetDataTable();
+
+            ...
+            // 콤보박스에서 선택된 Item의 Value 멤버 가져오기
+            string val = comboBox1.SelectedValue.ToString();
+    }
+
+
+
+  #DateTimePicker#
+  - 날짜를 선택하는 용도로 쓰임. 선택된 날짜를 텍스트 박스에 표시
+  
+  Format특성
+    -Long : 요일, 월, 일 , 년도
+    -Short: 일/월/년도
+    -Time: 시:분:초 AM or PM
+    -Format : 사용자 정의
+                => 년 yyyy(yy)
+                   월 MM
+                   일 dd
+                   시 hh
+                   분 mm
+  ValueChanged 이벤트는 사용자가 날짜를 변경했을때 발생   
+
+
+  #LinkLabel#
+  - 링크를 가진 라벨...
+  - LinkClicked=> 링크가 눌렸을 때 발생하는 이벤트
+
+
+
+  #ListBox#
+  박스 안에 선택 가능 옵션 리스트를 표시. 옵션 많으면 스크롤 사용 가능. 콤보박스와 같이 Items 속성 이용, SelectedIndex 지정해서 초기 선택값 세팅
+
+
+
+  #List View#
+  도서관 가서 복사 할 때 복사 대기중인 파일들 보여주는 그 창
+  아이템들을 여러 리스트 형태로 보여줌
+
+  - View 속성
+    Details, List, Tile, LargeIcon, SmallIcon 등이 있음
+
+  - 많은 아이템을 추가하려면 일시적으로 UI갱신 중지(BeginUpdate())한다음 업데이트 해야 함.
+
+
+  #MaskedTextBox#
+  -TextBox + 입력형식 제한. Mask 속성에서 형식을 지정할 수 있다.
+  - MaskInputRejected: 지정 형식과 맞지 않는 값이 들어온 경우 발생
+
+
+  #ToolTip#
+  - 특정 컨트롤에 지정한 팁 메시지 보여주기
+        => ToolTip1.SetToolTip(컨트롤 이름,메시지)
+ */
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp2
+{
+    public partial class Form1 : Form
+    {
+     
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void Form1_Load_1(object sender, EventArgs e) // Form을 선택한 후 속성에서 동작>Load 더블클릭
+        {
+            /*
+            //ComboBox Initializing
+            string[] data = { "사과", "토마토", "포도", "배", "복숭아" };
+
+            // 각 콤보박스에 데이타를 초기화
+            comboBox1.Items.AddRange(data);
+            // 처음 선택값 지정. 첫째 아이템 선택
+            comboBox1.SelectedIndex = 3;
+            comboBox1.Items.Add("Item 1"); // 단일 data 추가
+            //comboBox1.Items.Clear(); => 데이터 지우기
+            */
+
+
+
+            //TreeView
+            /*
+            // TreeView에 사용할 ImageList 정의
+            //ImageList imgList = new ImageList();
+            //imgList.Images.Add(Bitmap.FromFile("server.jpg"));
+            //imgList.Images.Add(Bitmap.FromFile("network.jpg"));
+            //treeView1.ImageList = imgList;
+
+            // 첫번째 TreeView 아이템 - 서버
+            TreeNode svrNode = new TreeNode("서버", 0, 0);
+            svrNode.Nodes.Add("SE", "서울 서버", 0, 0);
+            svrNode.Nodes.Add("DJ", "대전 서버", 0, 0);
+            svrNode.Nodes.Add("BS", "부산 서버", 0, 0);
+
+            // 두번째 TreeView 아이템 - 네트웍
+            TreeNode netNode = new TreeNode("네트웍", 1, 1);
+            netNode.Nodes.Add("T1", "T1 케이블", 1, 1);
+            netNode.Nodes.Add("56K", "56K 모뎀", 1, 1);
+            netNode.Nodes.Add("3G", "3G 무선", 1, 1);
+
+            //+ 팁=> 자식노드들에게만 각자 이미지 넣는 방법
+            //            => 부모노드한테 imagelist 인덱스 보다 큰 값 주기
+            // 2개의 노드를 TreeView에 추가
+            treeView1.Nodes.Add(svrNode);
+            treeView1.Nodes.Add(netNode);
+
+            // 모든 트리 노드를 보여준다
+            treeView1.ExpandAll();
+
+            // tree 다중 선택
+                // 1. 속성에서 CheckBox 사용한다.
+                // 2. 키보드 입력을 체크해서 개발자가 수동으로 선택 리스트 관리하게 한다.
+        
+        */
+            // NotifyIcon에 메뉴 추가
+            /*
+            ContextMenu ctx = new ContextMenu(); // NotifuIcon에서 마우스 우클릭 하면 나타나는 메뉴
+            ctx.MenuItems.Add(new MenuItem("열기")); // ContextMenu에 메뉴 넣으려면 MenuItem 써야함
+            ctx.MenuItems.Add(new MenuItem("실행"));
+            ctx.MenuItems.Add("-"); // 구분선. 긋다 말았는데..?
+            ctx.MenuItems.Add(new MenuItem("종료", new EventHandler((s, ex) => this.Close())));
+            notifyIcon1.ContextMenu = ctx;
+            */
+        }
+        //NotifiyIcon 더블클릭
+        /*
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // 아이콘을 더블클릭하면 폼 화면을 보여줌
+            if (this.WindowState == FormWindowState.Minimized) // 최소화 된 창을
+                this.WindowState = FormWindowState.Normal; // 두 번 클릭하면 다시 보여주는...
+            this.Activate();
+        }
+        */
+
+
+
+        //ComboBox
+        /*
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /
+            //아이템 선택되었을 때 해당 데이터를 클래스 필드에 저장
+            //if (comboDropDown.SelectedIndex >= 0)
+            //{
+                //this.itemSelected = comboDropDown.SelectedItem as string;
+            //}
+
+        }
+
+        private string itemSelected;
+        }
+        */
+
+
+
+
+        /*
+         
+        //DateTimePicker
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime dt = dateTimePicker1.Value; //.Value로 가져오는구나...
+            string str = string.Format("{0}월 {1}일을 선택", dt.Month, dt.Day); 
+            MessageBox.Show(str, "선택 날짜"); // str가 내용이고 "선택날짜"가 타이틀(?)인듯?
+        }
+        */
+
+
+
+        //LinkLabel
+        /*
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.naver.com"); //브라우저 팝업. 파일 실행할 때도 이거 쓴다
+        }
+        */
+
+
+
+        //List Box
+        /*
+        public partial class Form1 : Form
+       {
+          // 멤버쉽 Enum 타입
+          public enum MemberType
+          {
+             VIP = 0,
+             Regular, //1
+             Associate, //2
+             DayPass //3        
+          }
+
+          public Form1()
+          {
+             InitializeComponent();
+          }
+
+          private void Form1_Load(object sender, EventArgs e)
+          {
+             listBox1.Items.Add("VIP 회원");
+             listBox1.Items.Add("정회원");
+             listBox1.Items.Add("준회원");
+             listBox1.Items.Add("일일 회원");
+
+             // 정회원이 기본 선택
+             listBox1.SelectedIndex = 1; 
+          }
+
+          private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+          {        
+             memberType = (MemberType)listBox1.SelectedIndex; // 정회원 선택하면 1이고, 이게 MemberType 캐스팅 되면 Regular임.
+             // 나중에 memberType 출력해 보면 Regular 나옴
+          }
+
+          private MemberType memberType;
+       } 
+        */
+
+
+        //ListView
+
+        /*
+         private void Form1_Load(object sender, EventArgs e)
+        {
+            //현재 디렉토리 내의 파일리스트 얻기
+            string currDir = Environment.CurrentDirectory; // 컴퓨터의 정보(폴더 경로라던가,)
+            DirectoryInfo di = new DirectoryInfo(currDir);
+            FileInfo[] files = di.GetFiles();
+
+            // 리스트뷰 아이템을 업데이트 하기 시작.
+            // 업데이트가 끝날 때까지 UI 갱신 중지.
+            listView1.BeginUpdate();
+
+            // 뷰모드 지정
+            listView1.View = View.Details;
+
+            // 아이콘을 위해 이미지 지정
+            //LargeImageList, SmallImageList에 이미지 리스트 추가
+            listView1.LargeImageList = imageList1;
+            listView1.SmallImageList = imageList2;
+
+            foreach (var fi in files)
+            {
+            // 각 파일별로 ListViewItem객체를 하나씩 만듦
+            // 파일명, 사이즈, 날짜 정보를 추가
+            ListViewItem lvi = new ListViewItem(fi.Name); //파일 이름
+            lvi.SubItems.Add(fi.Length.ToString()); // 사이즈 추가
+            lvi.SubItems.Add(fi.LastWriteTime.ToString()); // 날짜 정보 추가
+            lvi.ImageIndex = 0;
+
+            // ListViewItem객체를 Items 속성에 추가
+            listView1.Items.Add(lvi); 
+            }
+
+            // 컬럼명과 컬럼사이즈 지정
+            listView1.Columns.Add("파일명", 200, HorizontalAlignment.Left);
+            listView1.Columns.Add("사이즈", 70, HorizontalAlignment.Left);
+            listView1.Columns.Add("날짜", 150, HorizontalAlignment.Left);
+
+            // 리스뷰를 Refresh하여 보여줌
+            listView1.EndUpdate();
+        }
+
+        // View모드를 지정
+        private void radioDetails_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.Details;
+        }
+
+        private void radioList_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.List;
+        }
+
+        private void radioTile_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.Tile;
+        }
+        //LargeIcon/SmallIcon 이벤트 핸들러 생략
+    }
+        */
+
+
+
+        //MaskedTextBox
+        /*
+           private void Form1_Load(object sender, EventArgs e)
+           {
+              // 0는 반드시 숫자 입력 요
+              // 9은 숫자나 공란
+              maskedTextBox1.Mask = "(999)000-0000";
+           }
+
+           private void maskedTextBox1_MaskInputRejected(object sender, 
+                        MaskInputRejectedEventArgs e) // 입력 형식이 잘못된 경우
+           {
+              if (e.Position < 5) // (999)인 경우
+              {
+                 toolTip1.Show("숫자나 공란만 입력 가능", this);
+              }
+              else // 000-0000 인 경우
+              {
+                 toolTip1.Show("숫자만 입력 가능", this);
+              }
+           }
+
+           private void button1_Click(object sender, EventArgs e)
+           {
+              string val = maskedTextBox1.Text;
+              MessageBox.Show(val);
+           } 
+        */
+    }
+}
+
