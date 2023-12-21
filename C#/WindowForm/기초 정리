@@ -196,7 +196,7 @@ namespace WindowsFormsApp2
             ctx.MenuItems.Add(new MenuItem("열기")); // ContextMenu에 메뉴 넣으려면 MenuItem 써야함
             ctx.MenuItems.Add(new MenuItem("실행"));
             ctx.MenuItems.Add("-"); // 구분선. 긋다 말았는데..?
-            ctx.MenuItems.Add(new MenuItem("종료", new EventHandler((s, ex) => this.Close()))); //람다식. 종료인데 이제 이벤트 발생하면 진짜 창이 종료되는 이벤트 핸들러를 루틴을 가지고 있는...
+            ctx.MenuItems.Add(new MenuItem("종료", new EventHandler((s, ex) => this.Close()))); //람다식. 종료인데 이제 이벤트 발생하면 진짜 창이 종료되는 무명 메소드를 가진 이벤트 핸들러를 루틴으로 가지고 있는...
             notifyIcon1.ContextMenu = ctx;
             */
         }
