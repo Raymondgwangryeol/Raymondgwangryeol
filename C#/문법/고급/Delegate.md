@@ -3,7 +3,7 @@
 공부 자료 : 예제로 배우는 C# 프로그래밍    
 </br></br>
 
-### 기초 개념
+## 1. 기초 개념
   Method를 다른 Method의 인자로 전달하기 위해 만들어 졌다.</br>
   함수 인자로 숫자 또는 객체를 전달하듯이, 메서드 또한 인수로서 전달 가능하다. (복수개의 Method도 전달 가능!)</br>
   Method 리턴도 가능.</br>
@@ -206,7 +206,7 @@ class Program
     
 ```cs
       
-     using System.Windows.Forms;
+using System.Windows.Forms;
 namespace MySystem
 {
    class MyArea : Form
@@ -274,3 +274,108 @@ namespace MySystem
 ### ■ Delegate와 함수 포인터
  - 함수 포인터: 함수가 어디 있는지만 앎/ 하나의 함수 포인터 가짐/ 자료형 safty 완전히 보장 안 함
  - delegate: 함수가 어디 있는지도 알고, 함수가 어디 담겨(?)있는지도 앎/ Multicast 가능/ 자료형 safty 완전히 보장
+
+</br></br></br>
+
+## 2. 무명 메서드(익명 메서드, Anonymous Method)
+  정의하려는 메서드가 고작 한 줄의 코드만 필요하다면? 이 단순한 일회용 코드를 가져다 메서드 정의를 하는 게 내 손가락에게 미안한 일이라면?</br>
+    -> 무명 메서드를 써 보세요!</br>
+   #### 형식: delegate(파라미터들) { 실행문장들 };
+
+#### [ 예제 ]
+
+</br>
+
+    
+```cs
+      
+public partial class Form1 : Form
+{
+   public Form1()
+   {
+      InitializeComponent();
+
+      // 메서드명을 지정
+      this.button1.Click += new System.EventHandler(this.button1_Click);
+
+      // 무명메서드를 지정
+      this.button2.Click += delegate(object s, EventArgs e)
+      {
+         MessageBox.Show("버튼2 클릭");
+      };
+   }
+
+   private void button1_Click(object sender, EventArgs e)
+   {
+      MessageBox.Show("버튼1 클릭");
+   }
+}
+
+```
+
+</br>
+
+앗! 잠깐! 그래도 여전히 귀찮은 당신을 위해!
+</br>
+#### [ 무명메소드 응용 예제 ]
+
+</br>
+
+    
+```cs
+      
+// Delegate 타입 : 
+public delegate int SumDelegate(int a, int b);
+                      
+// Delegate 사용 : 
+SumDelegate sumDel = new SumDelegate(mySum);
+                      
+// 무명메서드1
+// 정-직한 delegate 객체 선언 후 이벤트 추가
+button1.Click += new EventHandler(delegate(object s, EventArgs a) { MessageBox.Show("OK"); });
+
+// 무명메서드2
+// 이미 Cilck 이벤트가 받는 인자의 형태를 알고 있으니까 new EventHandler 굳이 쓰지 말자~
+button1.Click += (EventHandler) delegate(object s, EventArgs a) { MessageBox.Show("OK"); };
+
+// 무명메서드3
+//그럴거면 걍 캐스팅도 생략하자~
+button1.Click += delegate(object s, EventArgs a) { MessageBox.Show("OK"); };
+
+// 무명메서드4
+// object s, EventArgs a 파라미터 사용 안 할거면 쓰지 말자~
+button1.Click += delegate { MessageBox.Show("OK"); };
+
+```
+
+</br>
+
+#### [ 무명메소드 사용시 주의! ]
+
+</br>
+
+    
+```cs
+
+// 틀림: 컴파일 에러 발생
+//Invoke는 void 메서드인데, 현재 무명메서드는 인자의 형태를 지정하지 않아서 이게 나랑 타입이 맞는지 아닌지 모르겠음. 의심스러우니까 아예 안 받아야지~
+this.Invoke(delegate {button1.Text = s;} );
+
+// 맞는 표현
+// 입력 파라미터가 없고, 리턴타입 void 인 MethodInvoker 객체 만들어서 사용하자
+MethodInvoker mi = new MethodInvoker(delegate() { button1.Text = s; });
+this.Invoke(mi);
+
+// 축약된 표현
+// 입력 파라미터 없으니까 생략, 이미 Invoke가 받고자 하는 인자 형태 void인거 아니까 new 생략
+this.Invoke((MethodInvoker) delegate { button1.Text = s; });
+
+/* 
+MethodInvoker는 입력 파라미터가 없고, 리턴 타입이 void인 델리게이트이다.
+MethodInvoker는 System.Windows.Forms 에 다음과 같이 정의되어 있다.
+
+public delegate void MethodInvoker();
+*/
+
+```
+
