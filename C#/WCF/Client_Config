@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.serviceModel>
+    <client>
+      <!--name은 그냥 진짜로 이름 부여 하는 것 같은데..?-->
+      <endpoint
+        name="HttpHelloWorld"
+        contract="HellowWorldService.IHelloWorld"
+        binding="basicHttpBinding"
+        address="http://127.0.0.1:8080/WCFHello"
+        >
+      </endpoint>
+    </client>
+  </system.serviceModel>
+</configuration>
