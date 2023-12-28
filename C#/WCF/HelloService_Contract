@@ -1,0 +1,32 @@
+
+/*
+    서비스 계약을 선언. 서비스의 계약인 IHelloWorld 인터페이스를 정의한다.
+     WCF에서는 클라-서버간의 통신에 사용되는 인터페이스의 약속이 계약이다.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ServiceModel;
+
+namespace HellowWorldService
+{
+    [ServiceContract] // System.ServiceModel 네임스페이스의 ServiceContract 속성을 인터페이스에 명시해야 계약이 선언된다.
+    public interface IHelloWorld
+    {
+        [OperationContract]// 서비스 내에 사용될 메소드를 명시. 해당 특성이 명시되지 않은 메소듸의 경우, WCF는 해당 메소드를 계약의 일부로 생각하지 않음.
+        string SayHello();
+    }
+    public class HelloWorldWCFService : IHelloWorld
+    {
+        public string SayHello() //IHelloWorld 계약을 상속받아서 부모 인터페이스 안에서 정의된 SayHello를 정의한다.
+        {
+            return "Hello WCF World!";
+        }
+    }
+}
+
+
+
