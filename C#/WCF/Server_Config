@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <!--
+ 주소랑 바인딩이랑 Contract 값 일일이 다 써야되냐? 오바야...
+    => 그런 당신을 위해! 그런 서비스 설정 값들은 Configuration 파일들(Web.config, App.config)로 분리해놓고 불러오기만 하세요!!
+    
+ Configuration 파일 만드는 법
+     추가 -> 새 항목 -> 응용 프로그램 구성 파일 -> 추가
+-->
+  <System.ServiceModel>
+    <services>
+      <service name="HellowWorldService.HelloWorldWCFService"> <!-- Service의 이름과 일치합니다. 서비스 클래스 적으면 됨 계약 인터페이스 상속받으신 그 분 맞음 -->
+        <!--namespace.서비스 클래스 이름 이렇게 적으면 됨-->>
+        <host>
+          <baseAddresses>
+            <add baseAddresses="http://127.0.0.1:8080/WCFHello"/> <!--End point URI-->
+          </baseAddresses>
+        </host>
+        <!--namespace.계약 인터페이스 이름
+            바인딩 종류
+            address는 baseAddress와 같습니다 => 만약에 다르면 어떻게 됨...?
+         -->
+
+        <endpoint
+          contract="HellowWorldService.IHelloWorld" 
+          binding="basicHttpBinding"
+          address="">
+        </endpoint>
+      </service>
+    </services>
+  </System.ServiceModel>
+</configuration>
