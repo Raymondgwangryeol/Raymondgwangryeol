@@ -19,6 +19,7 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
 타입 파라미터는 여러개를 지정할 수도 있음.
 </br>
 
+
 ```cs
         
         
@@ -48,8 +49,8 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
         // 두 개의 서로 다른 타입을 갖는 스택 객체를 생성
         MyStack<int> numberStack = new MyStack<int>();
         MyStack<string> nameStack = new MyStack<string>();
-                
- '''
+
+,,,
 
 
 
