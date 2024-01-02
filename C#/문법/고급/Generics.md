@@ -19,41 +19,37 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
 타입 파라미터는 여러개를 지정할 수도 있음.
 </br>
 
-```cs
-
-
-        // 어떤 요소 타입도 받아들 일 수 있는
-        // 스택 클래스를 C# 제네릭을 이용하여 정의
-        class MyStack<T>
-        {
-            T[] _elements;
-            int pos = 0;
+        ```cs
         
-            public MyStack()
-            {
-                _elements = new T[100];
-            }
         
-            public void Push(T element)
-            {
-                _elements[++pos] = element;
-            }
-        
-            public T Pop()
-            {
-                return _elements[pos--];
-            }
-        }
-        
-        // 두 개의 서로 다른 타입을 갖는 스택 객체를 생성
-        MyStack<int> numberStack = new MyStack<int>();
-        MyStack<string> nameStack = new MyStack<string>();
-        
-'''
-
-
-
-
+                // 어떤 요소 타입도 받아들 일 수 있는
+                // 스택 클래스를 C# 제네릭을 이용하여 정의
+                class MyStack<T>
+                {
+                    T[] _elements;
+                    int pos = 0;
+                
+                    public MyStack()
+                    {
+                        _elements = new T[100];
+                    }
+                
+                    public void Push(T element)
+                    {
+                        _elements[++pos] = element;
+                    }
+                
+                    public T Pop()
+                    {
+                        return _elements[pos--];
+                    }
+                }
+                
+                // 두 개의 서로 다른 타입을 갖는 스택 객체를 생성
+                MyStack<int> numberStack = new MyStack<int>();
+                MyStack<string> nameStack = new MyStack<string>();
+                
+        '''
 
 
 
