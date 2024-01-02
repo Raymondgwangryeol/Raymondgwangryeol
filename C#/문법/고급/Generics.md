@@ -65,19 +65,16 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
 </br>
 
 
-        ```cs
         
         
-                List<string> nameList = new List<string>();
-                nameList.Add("홍길동");
-                nameList.Add("이태백");
+            List<string> nameList = new List<string>();
+            nameList.Add("홍길동");
+            nameList.Add("이태백");
                 
-                Dictionary<string, int> dic = new Dictionary<string, int>();
-                dic["길동"] = 100;
-                dic["태백"] = 90;
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            dic["길동"] = 100;
+            dic["태백"] = 90;
         
-        
-        '''
 
 
 </br>
