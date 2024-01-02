@@ -31,7 +31,8 @@ new{...}와 같은 형식을 사용. 안에 속성 =  값 할당을 한다. 각 
 
 
 
-''' private void RunTest()
+```cs
+private void RunTest()
 {
   var v new[] {
     new { Name="Lee", Age=33, Phone="02-111-1111" },
@@ -47,4 +48,4 @@ new{...}와 같은 형식을 사용. 안에 속성 =  값 할당을 한다. 각 
   }
 }
 
-'''
+```
