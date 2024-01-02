@@ -9,7 +9,8 @@ _C# 2.0부터 추가_
 Code Generator가 만든 코드와 사용자가 만드는 코드를 분리하기 위함.
 </br>
 
-예) 윈폼 Form1.designer.cs, Form1.cs에 Form1 class가 partial로 들어가 있다.
+**예)** 윈폼 Form1.designer.cs, Form1.cs에 Form1 class가 partial로 들어가 있다.
+</br>
 </br>
 
 **[예제]**
