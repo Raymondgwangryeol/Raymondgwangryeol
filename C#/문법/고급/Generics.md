@@ -60,6 +60,7 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
 특히, System.Collections.Generic 네임스페이스에 있는 모든 자료구조 관련 클래스들은 제네릭 타입임. (List<T>, Dictionary<T>, LinkedList<T> 등)
 </br>
 
+```cs
 
 
     List<string> nameList = new List<string>();
@@ -71,8 +72,8 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
     dic["태백"] = 90;
 
 
-
-
+'''
+ 
 </br>
 </br>
 
@@ -82,7 +83,7 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
 Generic Type을 선택할 때, 해당 인수가 어떤 조건을 만족하는 인수여야하는지 where 뒤에 제약 조건을 붙여서 받아올 데이터 타입을 제한할 수 있음.
 </br>
 
-
+```cs
 
       // T는 Value 타입(struct)
       class MyClass<T> where T : struct 
@@ -107,7 +108,9 @@ Generic Type을 선택할 때, 해당 인수가 어떤 조건을 만족하는 �
       
       // 복수 타입 파라미터 제약
       class MyClass<T, U> 
-          where T : class 
+          where T : class
+
+'''
           where U : struct
       {
       }
