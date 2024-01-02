@@ -1,3 +1,5 @@
+```cs
+
 // 예제로 배우는 C# 프로그래밍 참고
 
 using System;
@@ -55,6 +57,8 @@ namespace Basic
     }
 
     class indexer_01
+
+```
 
     {
         //클래스를 배열처럼 사용
