@@ -50,7 +50,7 @@ int, float 같은 데이터 타입을 특정짓지 않고, 나중에 쓸 때 데
                 MyStack<int> numberStack = new MyStack<int>();
                 MyStack<string> nameStack = new MyStack<string>();
         
-         '''
+         ```
 
 
 
