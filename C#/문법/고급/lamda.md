@@ -37,7 +37,7 @@ str => {MessageBox.Show(str)};
 
 ### 람다식 활용
 
-1. LINQ 쿼리
+**1. LINQ 쿼리**
 ```cs
   List<Person> people = new List<Person>
    {
@@ -51,7 +51,7 @@ str => {MessageBox.Show(str)};
    var result = people.Where(x => x.Name == "홍길동");
 ```
 
-2. 대리자(Delegate)
+**2. 대리자(Delegate)**
 ```cs
     public delegate int Calculator(int a, int b);
        
@@ -68,16 +68,17 @@ str => {MessageBox.Show(str)};
             Console.WriteLine(add(1, 2));
 ```
 
-3. 이벤트 핸들러
+**3. 이벤트 핸들러**
 ```cs
    Button button1 = new Button();
    button1.Click += (sender, e) => {Console.WriteLine("Clicked");}
 ```
-4. 스레드 처리
+**4. 스레드 처리**
 </br>
      코드가 간결해지고, 스레드에서 실행 될 코드를 직접 작성하는 것 보다 효율적인 코드 작성 가능.
      </br>
      더 적은 양의 코드로 멀티스레드를 처리할 수 있어, 복잡한 작업을 처리할 때 유용.
+     </br>
      </br>
 
 ```cs
