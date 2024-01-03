@@ -3,7 +3,7 @@ _C# 4.0부터 추가_
 </br>
 </br>
 
-#### 정적 언어(Static Language)
+#### ✔정적 언어(Static Language)
    C, C++, JAVA처럼 코드를 짤 때 변수에 무조건 자료형 지정하는 언어. 
    </br>
    자료형을 컴파일 시에 결정함.
@@ -22,7 +22,7 @@ _C# 4.0부터 추가_
    **장점:** 컴파일 시 타입에 대한 정보를 결정하기 때문에 속도 빠르고, 타입 에러 문제를 초기에 발견할 수 있어서 안정성 높음.
    </br>
 
-#### 동적 언어(Dynamic Language)
+#### ✔동적 언어(Dynamic Language)
    파이썬, 루비, 자바스크립트 같이 자료형 변수에 지정 안 해도 지 혼자 알아서 잘 집어넣는 언어.
    </br>
    컴파일 시 자료형이 정해지는게 아니라, 런타임 시 결정함.
@@ -57,7 +57,7 @@ _C# 4.0부터 추가_
      </br>
 
 
-### dynamic 키워드
+### ✔dynamic 키워드
 
    컴파일러가 변수의 자료형을 체크하지 않도록 하고, 런타임시까지는 해당 타입을 알 수 없음을 표시한다.
    </br>
@@ -100,7 +100,7 @@ _C# 4.0부터 추가_
    </br>
    </br>
 
-### 익명 타입에 dynamic 사용해보기
+### ✔익명 타입에 dynamic 사용해보기
 
    dynamic은 컴파일러에게 하나의 정적 타입으로 인식되기 때문에, 메서드 원형에서도 int나 string처럼 dynamic 파라미터를 지정할 수 있다.
    </br>
@@ -141,7 +141,7 @@ _C# 4.0부터 추가_
    </br>
    </br>
 
-### EdpandoObject 클래스 사용 예제
+### ✔EdpandoObject 클래스 사용 예제
    DLR의 Namespace인 System.Dynamic에서는 중요한 클래스인 ExpandoObject와, DynamicObject가 있음.
    </br>
    DynamicObject: 보다 유연한 Customization을 위한 고급 dynamic 기능 지원
@@ -245,7 +245,7 @@ _C# 4.0부터 추가_
    </br>
    </br>
 
-### ExpandoObject의 dynamic 멤버 보기
+### ✔ExpandoObject의 dynamic 멤버 보기
    ExpandoObject의 속성, 이벤트, 메서드는 IDictionary 해시 테이블에 저장됨.
    </br>
    ExpandoObject가 IDictionary 인터페이스를 구현하고 있기 때문에, 해당 인터페이스로 캐스팅 해서 내부 멤버 데어터에 접근할 수 있음.
