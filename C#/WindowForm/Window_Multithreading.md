@@ -5,6 +5,7 @@
 </br>
 이런 문제를 해결하기 위해서, 쓰레드 함수에서 UI 컨트롤 접근 시 항상 Control클래스의 InvokeRequired 속성을 체크해야한다.
 </br>
+
   **+)InvokeRequired?**
   </br>
     System.Windows.Forms에 정의되어 있으며, 멀티쓰레딩일 때 호출 스레드와 다른 스레드에 있다면 true, 아니면 false
