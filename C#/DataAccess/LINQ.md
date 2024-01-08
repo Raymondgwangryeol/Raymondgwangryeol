@@ -148,20 +148,76 @@ LINQ 쿼리는 객체 생성시 바로 실행되는게 아니라, foreach같이 
 3. SubmitChanges()로 DataContext객체 갱신
 
 </br>
+
+```cs
+
+  MyDBDataContext db = new MyDBDataContext();
+  
+  // 새 레코드 객체 생성
+  //'Member'라는 table이 .dbml에 포함되면, Member라는 레코드 클래스와 Members라는 테이블 클래스가 생성됨.
+  // 테이블 클래스 = 레코드들의 집합이라는 의미로, 복수로 써줌. (Member table => 'Members' table class)
+  Member mem = new Member(); 
+  mem.MemberId = 1;
+  mem.Name = "Alex";
+  mem.Address = "Seattle, WA";
+  
+  // 레코드객체를 테이블객체에 추가
+  db.Members.InsertOnSubmit(mem);
+  
+  // 서버에 전송
+  db.SubmitChanges(); 
+
+```
+
+
+</br></br></br>
+
+## LINQ to SQL: Update
+갱신 후 DataContext에서 SubmitChanges() 메서드 호출.
+
+</br>
+
+```cs
+MyDBDataContext db = new MyDBDataContext();
+
+// 갱신한 레코드 선택
+var m = db.Members.Where(p => p.MemberId == 1).SingleOrDefault();
+if (m != null)
+{
+    // 갱신
+    m.Name = "Alex L";
+    m.Address = "Redmond, WA";
+
+    // 서버에 저장
+    db.SubmitChanges();
+}
+
+```
+</br></br></br>
+
+## LINQ to SQL: Delete
+삭제할 레코드 부분을 LINQ로 지정한 후, 
+
+단일 레코드 삭제일 경우 .DeleteOnSubmit() 사용
+
+여러 레코드 삭제일 경우 .DeleteAllOnSubmit() 사용
+
+그 다음 SubmitChanges()로 업데이트
+
 ```cs
  MyDBDataContext db = new MyDBDataContext();
  
- // 새 레코드 객체 생성
- //'Member'라는 table이 .dbml에 포함되면, Member라는 레코드 클래스와 Members라는 테이블 클래스가 생성됨.
- // 테이블 클래스 = 레코드들의 집합이라는 의미로, 복수로 써줌. (Member table => 'Members' table class)
- Member mem = new Member(); 
- mem.MemberId = 1;
- mem.Name = "Alex";
- mem.Address = "Seattle, WA";
+ // 단일 레코드를 지울 경우
+ var mSingle = db.Members.Where(p => p.MemberId == 1).SingleOrDefault();
+ if (mSingle != null)
+ {
+     db.Members.DeleteOnSubmit(mSingle);
+     db.SubmitChanges();                
+ }
  
- // 레코드객체를 테이블객체에 추가
- db.Members.InsertOnSubmit(mem);
- 
- // 서버에 전송
+ // 복수 레코드를 지울 경우
+ var m = db.Members.Where(p => p.MemberId > 100);
+ db.Members.DeleteAllOnSubmit(m);
  db.SubmitChanges(); 
 ```
+
