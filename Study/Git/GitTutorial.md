@@ -151,26 +151,33 @@ Git push, Git pull, Git merge를 사용해 동기화 가능.</br>
 
 **[Merge 방법]**
 </br>
-(참고 자료: https://hudi.blog/git-merge-squash-rebase/)</br>
+(공부 자료: https://hudi.blog/git-merge-squash-rebase/)</br>
 
   1. **Merge(Fast Forward)**
        </br>
-       병합하려는 branch의 변경 이력을 그대로 main branch에 붙이기</br>
-     
+       <a href="https://ibb.co/1JWGR68"><img src="https://i.ibb.co/84ZgPc6/5-B82-D476-5-D8-A-4919-9-E3-E-98595982-F0-DB.png" alt="5-B82-D476-5-D8-A-4919-9-E3-E-98595982-F0-DB" border="0"></a>
+       </br>
+       병합하려는 branch의 변경 이력을 그대로 main branch에 붙이기</br></br>
   2. **Merge(Recursive)**
        </br>
+       <a href="https://ibb.co/31w9RW0"><img src="https://i.ibb.co/F69LHJB/BBC17088-7-F48-44-E4-88-F2-F30650121269.png" alt="BBC17088-7-F48-44-E4-88-F2-F30650121269" border="0"></a>
+       </br>
        하나의 branch와 다른 branch의 변경 이력 전체를 합치는 방법.</br>
-       커밋 A, B, C를 참조하는 커밋 M이 생기고, M을 통해 A+B+C가 master에 추가된다.</br>
+       변경하고자 하는 branch와 main branch를 공통 부모로 한 새로운 Merge commit 생성.</br></br>
      
   3. **Squash and Marge**
      </br>
+     <a href="https://ibb.co/Pc6m6vv"><img src="https://i.ibb.co/T4gvgxx/10-D1-B7-FF-F1-F7-4-A42-9431-36404-E99-DD58.png" alt="10-D1-B7-FF-F1-F7-4-A42-9431-36404-E99-DD58" border="0"></a>
+     </br>
        병합할 커밋들을 Squash해서 하나의 새로운 커밋으로 만들고, base branch에 추가</br>
-       Squash하면 모든 커밋 이력이 하나로 합쳐지고, 내용이 사라짐.</br>
+       Squash하면 모든 커밋 이력이 하나로 합쳐지고, 내용이 사라짐.</br></br>
      
   4. **Rebase and Merge**
      </br>
+     <a href="https://ibb.co/gyky976"><img src="https://i.ibb.co/6YjYwZN/1-D4-C90-A9-C0-F8-4301-A8-FA-29-E27-C9-DCCE4.png" alt="1-D4-C90-A9-C0-F8-4301-A8-FA-29-E27-C9-DCCE4" border="0"></a>
+     </br>
        재설정한 base에 붙이고자 하는 커밋들을 fast foward 병합.</br>
-       Rebase를 하면 커밋들의 base가 변경되므로, Commit Hash또한 변경될 수 있음. 때문에 Force Push를 해야할 경우도 발생.</br>
+       Rebase를 하면 커밋들의 base가 변경되므로, Commit Hash또한 변경될 수 있음. 때문에 Force Push를 해야할 경우도 발생.</br></br>
 </br>
 
 둘 이상의 구성원이 서로 다른 브랜치에서 파일의 동일한 부분을 수정할 경우 병합 도중 **충돌(Conflict)** 발생.</br>
@@ -217,7 +224,43 @@ rebase 옵션 중 -i(--interactive)를 쓰면,</br>
 </br>
 위의 명령어를 실행하면, 커밋 순서가 정리되어있는 문서 내용이 vim editor로 뜸.</br>
 vim editor에 적혀있는 command들이 있는데, 해당 command를 이용해 특정 커밋의 내용을 수정할 수 있음.</br>
+```
+noop
+
+# Rebase ... onto ... (1 command)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+#         create a merge commit using the original merge commit's
+#         message (or the oneline, if no original merge commit was
+#         specified); use -c <commit> to reword the commit message
+# u, update-ref <ref> = track a placeholder for the <ref> to be updated
+#                       to this position in the new commits. The <ref> is
+#                       updated at the end of the rebase
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+
+```
 </br>
+
 **[명령어들]**
   </br>
     - **pick:** 그냥 쓸게요
