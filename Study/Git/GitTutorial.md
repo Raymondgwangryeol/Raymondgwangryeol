@@ -116,13 +116,16 @@ Git push, Git pull, Git merge를 사용해 동기화 가능.
 [Merge 방법]
 (참고 자료: https://hudi.blog/git-merge-squash-rebase/)
 1. Merge(Fast Forward)
-   
+   병합하려는 branch의 변경 이력을 그대로 main branch에 붙이기
 2. Merge(Recursive)
    하나의 branch와 다른 branch의 변경 이력 전체를 합치는 방법.
-   커밋 F, G, H를 참조하는 커밋 M이 생기고, M을 통해 F+G+H가 master에 추가된다.
-4. Squash and Marge
-
-5. Rebase and Merge
+   커밋 A, B, C를 참조하는 커밋 M이 생기고, M을 통해 A+B+C가 master에 추가된다.
+3. Squash and Marge
+   병합할 커밋들을 Squash해서 하나의 새로운 커밋으로 만들고, base branch에 추가
+   Squash하면 모든 커밋 이력이 하나로 합쳐지고, 내용이 사라짐.
+4. Rebase and Merge
+   재설정한 base에 붙이고자 하는 커밋들을 fast foward 병합.
+   Rebase를 하면 커밋들의 base가 변경되므로, Commit Hash또한 변경될 수 있음. 때문에 Force Push를 해야할 경우도 발생.
    
 둘 이상의 구성원이 서로 다른 브랜치에서 파일의 동일한 부분을 수정할 경우 병합 도중 충돌(Conflict)가 발생.
 충돌시, 해당 부분을 직접 수정해야 하는데, Git이 수정이 필요한 부분에 충돌 해결 마커를 추가함.
