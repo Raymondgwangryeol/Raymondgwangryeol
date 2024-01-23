@@ -14,13 +14,17 @@ Git과 같은 버전 제어 시스템을 쓰면 쉽게 할 수 있는 작업들<
 
 ## Git의 구성 요소 3가지
 <img src="https://nulab.com/static/134fb800f3082b1907b07e5249744360/5a190/01.png"/>
+
 **- 저장소(Repository)**:
 </br>
-  모든 변경사항을 추적하는 컨테이너. 팀이 만든 모든 커밋을 다 가지고 있다. (git log 명령 쓰면 커밋 내역 확인 가능)</br>
+  모든 변경사항을 추적하는 컨테이너. 팀이 만든 모든 커밋을 다 가지고 있다. (git log 명령 쓰면 커밋 내역 확인 가능)
+  </br>
+  
 **- 작업 트리(Work Tree, Work Directory)**
 </br>
   작업 중인 파일을 트리로 보여줌. 해당 트리를 보고 수정할 수 있는 파일 시스템으로 볼 수도 있음.</br>
   여기서 트리는 파일의 묶음을 뜻함. 자료구조 그 트리 아님</br>
+  
 **- 인덱스(Staging Area, Index)**
 </br>
   데이터가 commit되기 전에, 아직 처리되지 않는 data가 있는 곳. Staging되면 작업 트리 파일과 저장소 파일을 비교해서 변경된 부분이 있는지 표시함.</br>
@@ -33,19 +37,24 @@ Git과 같은 버전 제어 시스템을 쓰면 쉽게 할 수 있는 작업들<
                      => 스냅샷: 사진 찍는것 처럼 특정 시점에 스토리지의 파일시스템을 순간포착해서 별도의 이미자나 파일로 저장하는 것.</br>
                                 장애나 data 손상시, 스냅샷 생성 시점으로 복구할 수 있다
 <img src="https://nulab.com/static/f4e393df06c82d4fd600c18081507b35/5a190/02.png"/>
+</br></br></br>
+
 ## Git 파일의 3가지 상태
+
 - 스테이징됨(Staged)
 - 커밋됨(Commited)
 - 수정됨(Modified)
 </br>
 
 **[과정]**
-일단 내가 파일 수정하면 -> 파일 트리에서 바로 변경사항 볼 수 있음</br>
--> 이걸 git이 추적할 수 있도록 Stage Area에 올려 놨다가 -> 의미 있는 변경사항(Version이라 함) 다음 Commit에 포함(기록)해서 -> </br>
- commit해서 파일을 인덱스에서 가져 와 가지고 ->변경 사항이 저장소의 새 스냅샷에 안정하게 기록됨(중앙 공유 저장소에도 변경 내용으로 수정. Modified) </br>
+</br>
+일단 내가 파일 수정하면 → 파일 트리에서 바로 변경사항 볼 수 있음</br>
+→ 이걸 git이 추적할 수 있도록 Stage Area에 올려 놨다가 → 의미 있는 변경사항(Version이라 함) 다음 Commit에 포함(기록)해서 </br>
+→ commit해서 파일을 인덱스에서 가져 와 가지고 → 변경 사항이 저장소의 새 스냅샷에 안정하게 기록됨(중앙 공유 저장소에도 변경 내용으로 수정. Modified) </br>
 </br>
 
 **+) commit 전에 add 왜 하나요**
+</br>
         Commit은 작업이 완결된 의미있는 변화를 기록하는 것.</br>
         만약 구현한 기능이 3개가 있는데, 이걸 한 번에 커밋하면... 동료 개발자들의 진심어린 덕담을 들을 수 있음...</br>
         이럴 때 add로 원하는 기능을 선택해서 해당 기능만 commit할 수 있음.</br>
@@ -70,10 +79,10 @@ Git과 같은 버전 제어 시스템을 쓰면 쉽게 할 수 있는 작업들<
 
 
 ### 변경 사항 기록
-로컬에서 변경 사항이 있다고 다 자동으로 기록되어지는게 아님.</br>
-작업 트리에서 변경 내용이 생기면 -> 인덱스에서는 수정된 것으로 일단 기록(저장소에 직접 저장되지는 않은 상태) -> </br>
-commit을 하면 -> 인덱스에서 staging을 통해 내용 변경할 저장소와 로컬 트리 파일을 비교해 바뀐 부분이 있는지 확인하고(Staged) -></br>
-Stagubg Area에서 파일을 가져와서, 스냅샷으로 저장소에 저장(Commited) -> 이걸 push하면 원격 저장소에 변경 내용이 적용됨(Modified)
+로컬에서 변경 사항이 있다고 다 자동으로 기록되어지는게 아님.</br></br>
+작업 트리에서 변경 내용이 생기면 → 인덱스에서는 수정된 것으로 일단 기록(저장소에 직접 저장되지는 않은 상태) </br>
+→ commit을 하면 → 인덱스에서 staging을 통해 내용 변경할 저장소와 로컬 트리 파일을 비교해 바뀐 부분이 있는지 확인하고(Staged)</br>
+→ Stagubg Area에서 파일을 가져와서, 스냅샷으로 저장소에 저장(Commited) → 이걸 push하면 원격 저장소에 변경 내용이 적용됨(Modified)
 </br></br>
 
 ### 변경 사항 커밋
@@ -94,7 +103,7 @@ git commit 명령어로 저장소의 Git 기록에 변경 내용을 기록할 �
 ### 커밋 취소 - git revert
 이전 커밋을 취소. 변경 사항을 실행 취소하는 가장 일반적인 방법이다.</br>
 커밋을 취소한다고 해서 커밋을 제거하거나, 저장소 수정을 하지 않고, 아예 변경사항을 되돌리는 새로운 커밋을 만들어버림. 기록을 보관하면서 git 저장소의 변경사항을 유지할 수 있음.</br>
-git reset이나 git rebase - i를 써서 아예 커밋을 삭제할 수도 있지만, 원격 저장소랑 다른 팀원들의 로컬 저장소랑 구조가 다를 수 있기 때문에, 일반적으로 권장되지 않음.</br>
+git reset이나 git rebase - i를 써서 아예 커밋을 삭제할 수도 있지만, 원격 저장소랑 다른 팀원들의 로컬 저장소랑 구조가 다를 수 있기 때문에, 일반적으로 권장되지 않음.</br></br>
 <img src="https://nulab.com/static/d4c010b3dbd1895bf9f63cd5ee63daf9/5a190/01.png"/>
 </br></br>
 
@@ -109,6 +118,7 @@ HEAD는 현재 commit을 가리키는 포인터.</br>
 1. --soft: 이전 커밋을 취소. HEAD 브랜치가 가리키고 있는 커밋만 변경.(이동)
 2. --mixed(기본): HEAD가 가리키고 있는 스냅샷을 인덱스에 업데이트(Index만 변경)
 3. --hard: Working directory를 Index의 상태로 업데이트 (Index, Worktree 둘 다 변경)
+</br>
 <image src="https://nulab.com/static/d3d319a98c48b1ce04570d547a6b0d84/5a190/03.png"/>
 </br></br></br>
 
@@ -131,17 +141,26 @@ Git push, Git pull, Git merge를 사용해 동기화 가능.</br>
 
 <img src = "https://git-scm.com/book/en/v2/images/basic-branching-5.png"/>
 
-**[Merge 방법]**</br>
+**[Merge 방법]**
+</br>
 (참고 자료: https://hudi.blog/git-merge-squash-rebase/)</br>
-    1. Merge(Fast Forward)</br>
+
+  1. **Merge(Fast Forward)**
+       </br>
        병합하려는 branch의 변경 이력을 그대로 main branch에 붙이기</br>
-    2. Merge(Recursive)</br>
+     
+  2. **Merge(Recursive)**
+       </br>
        하나의 branch와 다른 branch의 변경 이력 전체를 합치는 방법.</br>
        커밋 A, B, C를 참조하는 커밋 M이 생기고, M을 통해 A+B+C가 master에 추가된다.</br>
-    3. Squash and Marge</br>
+     
+  3. **Squash and Marge**
+     </br>
        병합할 커밋들을 Squash해서 하나의 새로운 커밋으로 만들고, base branch에 추가</br>
        Squash하면 모든 커밋 이력이 하나로 합쳐지고, 내용이 사라짐.</br>
-    4. Rebase and Merge</br>
+     
+  4. **Rebase and Merge**
+     </br>
        재설정한 base에 붙이고자 하는 커밋들을 fast foward 병합.</br>
        Rebase를 하면 커밋들의 base가 변경되므로, Commit Hash또한 변경될 수 있음. 때문에 Force Push를 해야할 경우도 발생.</br>
 </br>
@@ -179,12 +198,14 @@ A,B중 먼저 commit한 거를 새로운 base로 설정(rebase), 다른 한 사�
 
 
 rebase 옵션 중 -i(--interactive)를 쓰면,</br>
-과거 커밋 메시지 다시 쓰기(reword)</br>
-커밋 그룹을 함께 스쿼시(squash, fixup)</br>
-커밋 되지 않은 파일 추가(edit)</br>
+- 과거 커밋 메시지 다시 쓰기(reword)</br>
+- 커밋 그룹을 함께 스쿼시(squash, fixup)</br>
+- 커밋 되지 않은 파일 추가(edit)</br>
+
 등을 할 수 있음.</br>
 </br>
-git rebase -i {수정할 커밋의 직전 커밋}</br>
+**git rebase -i {수정할 커밋의 직전 커밋}**
+</br>
 </br>
 위의 명령어를 실행하면, 커밋 순서가 정리되어있는 문서 내용이 vim editor로 뜸.</br>
 vim editor에 적혀있는 command들이 있는데, 해당 command를 이용해 특정 커밋의 내용을 수정할 수 있음.</br>
