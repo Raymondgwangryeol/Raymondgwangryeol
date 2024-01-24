@@ -196,7 +196,7 @@ fetch로 가져와서 나중에 FETCH_HEAD부분 병합하거나, pulling하면 
        이 때 붙여지는 커밋들은 붙이고자 하는 기본 커밋과 내용은 같지만 아예 다른 커밋임! base 기반 branch에서 붙이고자 하는 branch를 기반으로 새로 만들어 적용함.</br>
        Rebase를 하면 커밋들의 base가 변경되므로, Commit Hash또한 변경될 수 있음. 때문에 Force Push를 해야할 경우도 발생.</br></br>
 </br>
-[merge vs rebase]
+**[merge vs rebase]**</br>
 merge: 병합된 브랜치의 모든 변경사항 및 기록이 유지됨. 대신, 기록이 복잡해질 수 있음.
 rebase: 내용은 같지만 다른 branch로 병합 된 새 커밋이 대상 branch에 끝에 추가되기 때문에, 기록이 깨끗함.(기존 기록 날아갔다는 뜻). 충돌이 더 많이 발생할 수 있다
 </br>
