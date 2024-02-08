@@ -204,4 +204,21 @@ ALTER TABLE 학생 ADD 학년 VARCHAR(3);
 ALTER TABLE 학생 ALTER 학번 VARCHAR(10), NOT NULL;
 ```
 
+## DDL - DROP
+- Table, 인덱스, 스키마, 도메인 등 뭔가 좀 형식적 또는 구조적인 걸 통으로 버리는 명령
+
+```sql
+DROP SCHEMA 스키마명 [CASCADE | RESTRICT];
+DROP DOMAIN 도메인명 [CASCADE | RESTRICT];
+DROP TABLE 테이블명 [CASCADE | RESTRICT];
+DROP VIEW 뷰명 [CASCADE | RESTRICT];
+DROP INDEX 인덱스명 [CASCADE | RESTRICT];
+DROP CONSTRAINT 제약조건명;
+```
+
+[예제]
+학생 테이블을 제거하되 학생 테이블을 참조하는 모든 데이터를 함께 제거하시오.
+```sql
+DROP TABLE 학생 CASCADE;
+```
 
