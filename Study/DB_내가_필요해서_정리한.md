@@ -145,7 +145,7 @@ AS SELECT문
 
 +)AS가 뭐예요
 1. 별칭(with SELECT 문)
-2. Table이나 속성 명을 다시 새롭게(?) 지정할 때. 다른 이름으로 저장 느낌임
+2. Table이나 속성 명을 다시 새롭게(?) 지정할 때. 다른 이름으로 저장 느낌임 -> SET이 이런 느낌이 좀 더 강하게 남
    
 [예제]
 고객 테이블에서 '주소'가 '안산시'인 고객들의 '성명'과 '전화번호'를 '안산고객'이라는 뷰로 정의하시오.
@@ -182,3 +182,26 @@ ON 테이블명(속성명 [ASC | DESC] [, 속성명 [ASC | DESC]]...) /*Default�
 CREATE UNIQUE INDEX 고객번호_idx
 ON 고객(고객번호 DESC);
 ```
+
+## DDL- ALTER(테이블의 정의와!!!속성!!! 변경)
+### 1) ALTER TABLE
+```sql
+ALTER TABLE 테이블명 ADD 속성명 데이터_타입 [DEFAULT '기본값']; /*ADD: 새로운 속성(열)을 추가한다*/
+ALTER TABLE 테이블명 ALTHER 속성명 [SET DEFAULT '기본값']; /*ALTER: 특정 속성의 Default 값을 변경한다*/
+ALTER TABLE 테이블명 DROP COLUMN 속성명 [CASCADE]; /*DROP COLUMN: 특정 속성을 삭제한다*/
+```
+
+[예제1]
+학생 테이블에 최대 3 문자로 구성되는 학년 속성을 추가하시오.
+
+```sql
+ALTER TABLE 학생 ADD 학년 VARCHAR(3);
+```
+
+[예제2]
+학생 테이블의 학번 필드의 데이터 타입과 크기를 VARCHAR(10)으로 하고, NULL값이 입력되지 않도록 변경하시오.
+```sql
+ALTER TABLE 학생 ALTER 학번 VARCHAR(10), NOT NULL;
+```
+
+
