@@ -513,5 +513,8 @@ FROM 상여금;
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/4e912976-3eb6-4d9d-abf7-87777783de1c)
 
 
-요약하자면 WINDOW는 원하는 조건에 맞게 값을 정돈해서 뽑아내는 바이브?
-GROUP BY는 계산, 통계 등을 보고 싶을 때 하는 바이브?
+요약하자면 WINDOW는 원하는 조건에 맞게 값을 정돈해서 뽑아내는 바이브?   
+
+GROUP BY는 계산, 통계 등을 보고 싶을 때 하는 바이브?  
+
+
