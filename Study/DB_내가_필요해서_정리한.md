@@ -405,5 +405,113 @@ FROM 테이블명[, 테이블명, ...]
 |MIN(속성명)|그룹 별 **최소값**을 구하는 함수|
 |STDDEV(속성명)|그룹 별 **표준편차**를 구하는 함수|
 |VARIANCE(속성명)|그룹 별 **분산**을 구하는 함수|
-|ROLLUP(속성명)|인수로 주어진 속성을 대상으로 그룹별 소계를 구하는 함수. 속성의 개수가 N개이면 N+1레벨까지, 하위 레벨에서 상위 레벨 순으로 데이터가 집계됨.|
-|CUBE(속성명,)|ROLLUP과 유사한 형태이지만, CUBE는 인수로 주어진 속성을 대상으로 **모든 조합의 그룹별 소계**를 구함. 속성의 개수가 n개이면, 2ⁿ레벨까지, 상위 레벨에서 하위 레벨 순으로 데이터가 집계됨.|
+|ROLLUP(속성명1, 속성명2, ...)|인수로 주어진 속성을 대상으로 그룹별 소계를 구하는 함수. 속성의 개수가 N개이면 N+1레벨까지, 하위 레벨에서 상위 레벨 순으로 데이터가 집계됨.|
+|CUBE(속성명1, 속성명2, ...)|ROLLUP과 유사한 형태이지만, CUBE는 인수로 주어진 속성을 대상으로 **모든 조합의 그룹별 소계**를 구함. 속성의 개수가 n개이면, 2ⁿ레벨까지, 상위 레벨에서 하위 레벨 순으로 데이터가 집계됨.|
+
+
+
+#### [예제 1. GROUP BY - AVG()]
+
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/57fca3db-1a3e-44fe-9224-9dbca8dc732f)
+- <상여금>테이블에서 '부서'별 '상여금'평균을 구하시오
+ 
+```sql
+SELECT 부서, AVG(상여금) AS 평균
+FROM 상여금
+GROUP BY 부서;
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/25da9b3c-d62c-4cd3-8f34-41a4fefcb981)
+
+
+#### [예제 2. GROUP BY - COUNT()]
+- <상여금>테이블에서 '부서'별 튜플 수를 구하시오
+ 
+```sql
+SELECT 부서, COUNT(*) AS 사원수
+FROM 상여금
+GROUP BY 부서;
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/721df575-3a73-4938-a2ff-92349afd295e)
+
+
+#### [예제 3. GROUP BY - HAVING]
+- <상여금>테이블에서 '상여금'이 100이상인 사원이 2명 이상인 '부서'의 튜플 수를 구하시오
+ 
+```sql
+SELECT 부서, COUNT(*) AS 사원수
+FROM 상여금
+WHERE 상여금>=100
+GROUP BY 부서
+HAVING COUNT(*)>=2;
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/e0d44105-4be0-4518-8702-98ec82b8b999)
+
+
+### GROUP BY - 그룹 지정 검색(ROLLUP, CUBE)
+**GROUP BY ROLLUP(칼럼1, 칼럼2...):** 전체 합계는 맨 아래 나오고 -> 2레벨 컬럼 별 합계가 그 위 구역에 나오고 -> 맨 처음으로 3레벨 , 2레벨 별 합계가 나옴   
+**GROUP BY CUBE(칼럼1, 칼렴2 ...):** ROLLUP의 반대. 맨 위에 전체 합계 -> 2레벨 컬럼 별 합계 -> 맨 마지막 3레벨, 2레벨 별 합계   
+잘 모르시겠다고요? 예제를 보면 그나마 낫습니다!
+
+#### [예제 4. GROUP BY ROLLUP]
+- <상여금>테이블의 '부서', '상여내역' 그리고 '상여금'에 대해 부서별 상여내역별 소계와 전체 합계를 검색하시오(속성명은 '상여금합계'로 할 것)
+ 
+```sql
+SELECT 부서 상여내역, SUM(상여금) AS "상여금합계"
+FROM 상여금;
+GROUP BY ROLLUP(부서, 상여내역);
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/5b410a13-d8bd-488f-af28-49ce4774c48b)
+
+
+#### [예제 5. GROUP BY CUBE]
+- <상여금>테이블의 '부서', '상여내역' 그리고 '상여금'에 대해 부서별 상여내역별 소계와 전체 합계를 검색하시오(속성명은 '상여금합계'로 할 것)
+ 
+```sql
+SELECT 부서 상여내역, SUM(상여금) AS "상여금합계"
+FROM 상여금;
+GROUP BY CUBE(부서, 상여내역);
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/76dfc682-c406-47ab-8c8e-1a315473f634)
+
+
+### Window 함수
+- GROUP BY절을 이용하지 않고, 함수의 인수로 지정한 속성의 값을 집계함.
+- 이 속성이 집계 범위가 되는데, 이를 윈도우(WINDOW)라고 함.
+- WINDOW 함수 종류
+  - ROW_NUMBER(): 윈도우 별로(각 범위 당), 각 레코드에 대한 일련 번호 반환.
+  - RANK(): 윈도우 별 순위 반환, 공동 순위도 반영.
+  - DENSE_RANK(): 윈도우 별 순위 반환 하는데 공동 순위 인정 못 함.
+
+#### [예제 1. WINDOW ROW_NUMBER()]
+- <상여금>테이블에서 '상여내역'별로 '상여금'에 대한 일련 번호를 구하시오(순서는 내림차순, 속성명은 NO로 할 것)
+  - 상여내역 별로 = WINDOW
+  - 상여금에 대한 일련 변호 = ROW_NUMBER
+ 
+```sql
+SELECT 상여내역, 상여금, ROW_NUMBER() OVER (PATITION BY 상여내역 ORDER BY 상여금 DESC) AS NO
+FROM 상여금;
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/ff28f750-ea1e-4949-bd63-292fb7085348)
+
+
+#### [예제 2. WINDOW RANK()]
+- <상여금>테이블에서 '상여내역'별로 '상여금'에 대한 순위를 구하시오(순서는 내림차순, 속성명은 '상여금순위'로 할 것)
+  - 상여내역 별로 = WINDOW
+  - 상여금에 대한 순위 = RANK()
+ 
+```sql
+SELECT 상여내역, 상여금, RANK() OVER (PATITION BY 상여내역 ORDER BY 상여금 DESC) AS "상여금순위"
+FROM 상여금;
+```
+[결과]   
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/4e912976-3eb6-4d9d-abf7-87777783de1c)
+
+
+요약하자면 WINDOW는 원하는 조건에 맞게 값을 정돈해서 뽑아내는 바이브?
+GROUP BY는 계산, 통계 등을 보고 싶을 때 하는 바이브?
