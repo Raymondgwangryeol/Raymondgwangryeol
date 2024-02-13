@@ -1,3 +1,4 @@
+📓공부 자료: https://velog.io/@ocy7111/%EC%A0%95%EC%B2%98%EA%B8%B0-%EC%8B%A4%EA%B8%B0-%EC%95%94%EA%B8%B07.-SQL-%EC%9D%91%EC%9A%A9
 정보처리기사 DBMS 부분을 공부하고 정리한 문서임.
 
 # 트랜잭션(Transaction)
