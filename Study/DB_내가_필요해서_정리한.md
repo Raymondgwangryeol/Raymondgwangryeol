@@ -188,7 +188,7 @@ ON 고객(고객번호 DESC);
 ### 1) ALTER TABLE
 ```sql
 ALTER TABLE 테이블명 ADD 속성명 데이터_타입 [DEFAULT '기본값']; /*ADD: 새로운 속성(열)을 추가한다*/
-ALTER TABLE 테이블명 ALTHER 속성명 [SET DEFAULT '기본값']; /*ALTER: 특정 속성의 Default 값을 변경한다*/
+ALTER TABLE 테이블명 ALTER 속성명 [SET DEFAULT '기본값']; /*ALTER: 특정 속성의 Default 값을 변경한다*/
 ALTER TABLE 테이블명 DROP COLUMN 속성명 [CASCADE]; /*DROP COLUMN: 특정 속성을 삭제한다*/
 ```
 
@@ -455,7 +455,7 @@ HAVING COUNT(*)>=2;
 **GROUP BY CUBE(칼럼1, 칼렴2 ...):** ROLLUP의 반대. 맨 위에 전체 합계 -> 2레벨 컬럼 별 합계 -> 맨 마지막 3레벨, 2레벨 별 합계   
 잘 모르시겠다고요? 예제를 보면 그나마 낫습니다!
 
-#### [예제 4. GROUP BY ROLLUP]
+#### :pencil2: [예제 4. GROUP BY ROLLUP]
 - <상여금>테이블의 '부서', '상여내역' 그리고 '상여금'에 대해 부서별 상여내역별 소계와 전체 합계를 검색하시오(속성명은 '상여금합계'로 할 것)
  
 ```sql
@@ -517,4 +517,81 @@ FROM 상여금;
 
 GROUP BY는 계산, 통계 등을 보고 싶을 때 하는 바이브?  
 
+### 집합 연산자를 이용한 통합 질의
+집합 연산자를 사용해, 2개 이상의 테이블의 데이터를 하나로 통합한다!
+```sql
+SELECT 속성명1, 속성명2, ...
+FROM 테이블명
+UNION | UNION ALL | INTERSECT | EXCEPT
+SELECT 속성명1, 속성명2, ...
+FROM 테이블명
+[ORDER BY 속성명 [ASC | DESC]];
+```
+- UNION: 합집합, 중복은 한 번만
+- UNION ALL: 합집합, 중복 그냥 묻고 가
+- INTERSECT: 교집합
+- EXCEPT: 차집합
 
+#### [예제 1. UNION]
+- <사원>테이블과 <직원>테이블을 통합하는 질의문을 작성하시오.(단, 같은 레코드가 중복되어 나오지 않게 하시오)
+
+```sql
+SELECT * FROM 사원
+UNION
+SELECT * FROM 직원;
+```
+#### [예제 2. INTERSECT]
+- <사원>테이블과 <직원>테이블에 공통으로 존재하는 레코드만 통합하는 질의문을 작성하시오.
+
+```sql
+SELECT * FROM 사원
+INTERSECT
+SELECT * FROM 직원
+```
+
+<br><br>
+## DML(3) - JOIN
+2개의 릴레이션에서 연관된 튜플들을 결합해서, 하나의 새로운 릴레이션을 반환하는 명령어.
+일반적으로 FROM 절에 쓰지만, 릴레이션이 사용되는 곳 어디서나 사용 가능!
+크게 INNER JOIN과 OUTER JOIN으로 나뉨.
+
+### INNER JOIN
+- 일반적으로 EQUI JOIN과 NON-EQUI JOIN으로 구분됨.
+- 조건이 없는 INNER JOIN은 CROSS JOIN이랑 똑같은 결과를 반환.
+  -CROSS JOIN(교차 조인)?
+  	- 조인하는 두 테이블에 있는 튜플들의 순서쌍을 반환(싹 다 뽑아버리기)
+  	- 교차 조인의 결과로 반환되는 테이블 행 수는 두 테이블 행 수의 곱과 같음!
+
+### INNER JOIN - EQUI JOIN
+- JOIN 조건절에 =를 쓴 JOIN문을 말함.
+- 같은 값을 가지는 행을 연결하여 결과를 생성하는 방법.
+- = 비교시, 양쪽 다 훑기 때문에 동일한 놈이 2번 나오게 됨. 이 중복되는 친구들 중 한 명을 없애버리는 방법을 NATURAL JOIN이라고 함
+
+- 
+**[WHERE절 이용한 EQUI JOIN]**
+```sql
+SELECT [테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1, 테이블명2 ...
+WHERE 테이블명1.속성명 = 테이블명2. 속성명;
+```
+
+
+**[NATURAL JOIN절을 이용한 EQUI JOIN]**
+```sql
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1 NATURAL JOIN 테이블명2 
+```
+
+
+**[JOIN ~USING절을 이용한 EQUI JOIN]**
+```sql
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1 JOIN 테이블명2 USING(속성명);
+```
+
+#### [예제 1. EQUI JOIN]
+- <학생>테이블과 <학과> 테이블에서 '학과코드'값이 같은 튜플을 JOIN하여 '학번', '이름', '학과코드', '학과명'을 출력하는 SQL문을 작성하시오.
+```sql
+SELECT 학번, 이름, 학생.학과코드 학과명
+FROM 학생 JOIN 학과 USING(학과코드); /*학생에 학과를 JOIN해서 학생의 학과코드를 쓰나 봄!*/
+```
