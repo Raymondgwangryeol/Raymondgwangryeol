@@ -249,6 +249,7 @@ DROP TABLE 학생 CASCADE;
 |INSERT|튜플 삽입|
 |DELETE|튜플 삭제|
 |UPDATE|튜플 갱신|
+
 <br><br>
 
 ## 🍊 DML - SELECT(1)
