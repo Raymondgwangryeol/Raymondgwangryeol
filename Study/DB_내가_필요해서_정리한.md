@@ -1,7 +1,7 @@
 📓공부 자료: ocy7111.log Dev_Oh님 정처기 실기 암기(7. SQL 응용)   
 정보처리기사 DBMS 부분을 공부하고 정리한 문서임.
 
-# 트랜잭션(Transaction)
+# 🍓 트랜잭션(Transaction)
 인가받지 않은 사용자로부터 데이터를 보장하기 위해, DBMS가 가져야 하는 특성, 하나의 논리적 기능을 정상적으로 수행하기 위한 <mark>작업의 기본 단위</mark>   
 👉 얘 함수같은 놈임.
 
@@ -30,7 +30,7 @@
 - <code>CHECKPOINT</code>(SAVEPOINT): **ROLLBACK 할 시점** 지정
 
 
-# 데이터 정의어(DDL: Data Definition Language)
+# 🍓 데이터 정의어(DDL: Data Definition Language)
 DB구축, 수정 목적으로 사용하는 언어
 
 ## 🍊 DDL 대상
@@ -681,4 +681,4 @@ WHERE 학생.학과코드 = 학과.학과코드(+)
 
 <br><br>
 
-# 데이터 제어어(DCL: Data Control Language)
+# 🍓 데이터 제어어(DCL: Data Control Language)
