@@ -1,4 +1,6 @@
-📓공부 자료: ocy7111.log Dev_Oh님 정처기 실기 암기(7. SQL 응용)   
+	📓공부 자료: ocy7111.log Dev_Oh님 정처기 실기 암기(7. SQL 응용)   
+<br>
+
 정보처리기사 DBMS 부분을 공부하고 정리한 문서임.
 
 # 🍓 트랜잭션(Transaction)
