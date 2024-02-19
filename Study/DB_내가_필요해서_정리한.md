@@ -29,9 +29,11 @@
 - <code>ROLLBACK</code>: 트랜잭션 내용의 **저장 무효화**(되돌리기)
 - <code>CHECKPOINT</code>(SAVEPOINT): **ROLLBACK 할 시점** 지정
 
+<br><br><br>
 
 # 🍓 데이터 정의어(DDL: Data Definition Language)
 DB구축, 수정 목적으로 사용하는 언어
+<br><br>
 
 ## 🍊 DDL 대상
 - 도메인(Domain): 하나의 속성이 가질 수 있는 원자값들의 집합(struct 느낌임)
@@ -48,9 +50,11 @@ DB구축, 수정 목적으로 사용하는 언어
     - 결합 인덱스(Concatenated Index): 두 개 이상의 컬럼으로 구성
     - 클러스터드 인덱스(Cluster Index): 인덱스 키의 순서에 따라 데이터도 같이 정렬됨. (검색 빠름)
     - 넌클러스터드 인덱스(Non-Clustered Index): 인덱스의 키 값이랑 데이터의 순서랑 아무 상관 없음. ㄹㅇ 저장된 순으로 번호 순서대로 매긴다
+<br><br>
 
 ## 🍊 DDL 명령어
 <code>CREATE</code>(생성), <code>ALTER</code>(수정), <code>DROP</code>(삭제), <code>TRUNCATE</code>(데이터 싸그리 삭제)
+<br><br>
 
 ## 🍊 DDL- CREATE
 ### 1) CREATE DOMAIN
@@ -63,6 +67,7 @@ DB구축, 수정 목적으로 사용하는 언어
              [DEFAULT 기본값]
              [CONSTRAINT 제약 조건 명 CHECK (범위값)]
      ```
+<br>
 
 ### 2) CREATE SCHEMA
 - 스키마
@@ -71,6 +76,7 @@ DB구축, 수정 목적으로 사용하는 언어
 ```sql
  CREATE SCHEMA 스키마 이름 AUTHORIZATION 사용자_ID;
 ```
+<br>
 
 **✏️ [예제]**  
 소유권자의 사용자 ID가 '홍길동'인 스키마 '대학교'를 정의하는 SQL문
@@ -157,6 +163,7 @@ AS SELECT 성명, 전화번호
 FROM 고객
 WHERE 주소 = '안산시';
 ```
+<br><br>
 
 ### 5) CREATE INDEX
 - 인덱스(Index): 검색 시간을 단축 시키기 위해 만든 보조적인 데이터 구조
@@ -183,6 +190,7 @@ ON 테이블명(속성명 [ASC | DESC] [, 속성명 [ASC | DESC]]...) /*Default�
 CREATE UNIQUE INDEX 고객번호_idx
 ON 고객(고객번호 DESC);
 ```
+<br><br>
 
 ## 🍊 DDL- ALTER(테이블의 정의와!!!속성!!! 변경)
 ### 1) ALTER TABLE
@@ -204,6 +212,7 @@ ALTER TABLE 학생 ADD 학년 VARCHAR(3);
 ```sql
 ALTER TABLE 학생 ALTER 학번 VARCHAR(10), NOT NULL;
 ```
+<br><br>
 
 ## 🍊 DDL - DROP
 - Table, 인덱스, 스키마, 도메인 등 뭔가 좀 형식적 또는 구조적인 걸 통으로 버리는 명령
@@ -216,15 +225,18 @@ DROP VIEW 뷰명 [CASCADE | RESTRICT];
 DROP INDEX 인덱스명 [CASCADE | RESTRICT];
 DROP CONSTRAINT 제약조건명;
 ```
+<br>
 
-**[예제]**
+#### **✏️[예제]**
 학생 테이블을 제거하되 학생 테이블을 참조하는 모든 데이터를 함께 제거하시오.
 ```sql
 DROP TABLE 학생 CASCADE;
 ```
+<br><br><br>
 
-# 데이터 조작어(DML: Data Manipulation Language)
+# 🍓 데이터 조작어(DML: Data Manipulation Language)
 저장된 데이터를 실질적으로 관리하는데 사용하는 명령어
+<br>
 
 ## 🍊 DML 명령어들
 - SELECT(조회), INSERT(삽입), UPDATE(수정), DELETE(삭제)
@@ -235,6 +247,7 @@ DROP TABLE 학생 CASCADE;
 |INSERT|튜플 삽입|
 |DELETE|튜플 삭제|
 |UPDATE|튜플 갱신|
+<br><br>
 
 ## 🍊 DML - SELECT(1)
 :boom: **SELECT 순서 - S,F,W,G,H,O**   
@@ -250,6 +263,7 @@ FROM 테이블명[, 테이블명, ...] /*가져올 테이블 지정*/
 [HAVING 조건]
 [ORDER BY 속성명 [ASC | DESC]]; /*오름차순 OR 내림차순 정렬해서 검색할 때 사용. 디폴트는 오름차순*/
 ```
+<br>
 
 ### 🍋 조건 연산자
 #### 1. 비교 연산자
@@ -376,7 +390,7 @@ FROM 테이블명[, 테이블명, ...] /*가져올 테이블 지정*/
   FROM 사원, 여가활동
   WHERE 여가활동.경력>=10 AND 여가활동.이름 = 사원.이름);  /*이미 두 개의 테이블을 SELECT 했기 때문인 것 같음.*/
   ```
-  
+<br><br>  
 
 ## 🍊 DML - SELECT(2): 그룹 함수
 ```sql
@@ -449,6 +463,7 @@ HAVING COUNT(*)>=2;
 [결과]   
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/e0d44105-4be0-4518-8702-98ec82b8b999)
 
+<br>
 
 ### 🍋 GROUP BY - 그룹 지정 검색(ROLLUP, CUBE)
 **GROUP BY ROLLUP(칼럼1, 칼럼2...):** 전체 합계는 맨 아래 나오고 -> 2레벨 컬럼 별 합계가 그 위 구역에 나오고 -> 맨 처음으로 3레벨 , 2레벨 별 합계가 나옴   
@@ -477,6 +492,7 @@ GROUP BY CUBE(부서, 상여내역);
 ```
 [결과]   
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/76dfc682-c406-47ab-8c8e-1a315473f634)
+<br>
 
 
 ### 🍋 Window 함수
@@ -516,6 +532,7 @@ FROM 상여금;
 요약하자면 WINDOW는 원하는 조건에 맞게 값을 정돈해서 뽑아내는 바이브?   
 
 GROUP BY는 계산, 통계 등을 보고 싶을 때 하는 바이브?  
+<br>
 
 ### 🍋 집합 연산자를 이용한 통합 질의
 집합 연산자를 사용해, 2개 이상의 테이블의 데이터를 하나로 통합한다!
@@ -550,6 +567,7 @@ SELECT * FROM 직원
 ```
 
 <br><br>
+
 ## 🍊 DML(3) - JOIN
 2개의 릴레이션에서 연관된 튜플들을 결합해서, 하나의 새로운 릴레이션을 반환하는 명령어.
 일반적으로 FROM 절에 쓰지만, 릴레이션이 사용되는 곳 어디서나 사용 가능!
@@ -561,6 +579,7 @@ SELECT * FROM 직원
   -CROSS JOIN(교차 조인)?
   	- 조인하는 두 테이블에 있는 튜플들의 순서쌍을 반환(싹 다 뽑아버리기)
   	- 교차 조인의 결과로 반환되는 테이블 행 수는 두 테이블 행 수의 곱과 같음!
+<br>
 
 ### 🍋 INNER JOIN - EQUI JOIN
 - JOIN 조건절에 =를 쓴 JOIN문을 말함.
@@ -621,10 +640,12 @@ SELECT 학번, 이름, 성적, 등급
 FROM 학생, 성적등급
 WHERE (NON-EQUI JOIN 학생.성적 BETWEEN 성적등급.최저 AND 성적등급.최고); /*자꾸 최저.성적등급<=성적 AND 성적<=최고.성적등급 이런식으로 쓰네..*/
 ```
+<br>
 
 ### 🍋 OUTER JOIN
 - JOIN 조건에 만족하지 않는 튜플들도 싹 다 결과로 출력. 쓰읍 그냥 합집합 아니냐..?
 - LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN이 있음.
+<br>
 
 ### 🍋 OUTER JOIN - LEFT OUTER JOIN
 - INNER JOIN후, 우측 항 릴레이션의 어떤 튜플과도 안 맞는 좌측 항 릴레이션 튜플들에 NULL값을 붙여 INNER JOIN 결과에 추가.(우측항을 기준으로 왼쪽 거를 갖다 붙임)
@@ -639,6 +660,7 @@ SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
 FROM 테이블명1, 테이블명2
 WHERE 테이블명1.속성명 = 테이블명2.속성명(+);
 ```
+<br>
 
 ### 🍋 OUTER JOIN - RIGHT OUTER JOIN
 - INNER JOIN후, 좌측 항 릴레이션의 어떤 튜플과도 맍지 않는 우측 항 릴레이션의 튜플들에 NULL값을 붙여 INNER JOIN 결과에 추가.(좌측항을 기준으로 오른쪽 거를 갖다 붙임)
@@ -653,6 +675,7 @@ SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
 FROM 테이블명1, 테이블명2
 WHERE 테이블명1.속성명 = 테이블명2.속성명;
 ```
+<br>
 
 ### 🍋 OUTER JOIN - FULL OUTER JOIN
 - RIGHT INNER JOIN + LEFT INNER JOIN
@@ -679,6 +702,6 @@ WHERE 학생.학과코드 = 학과.학과코드(+)
 ```
 - JOIN 구문을 기준으로 테이블의 위치를 교환하여 RIGHT JOIN을 해도 같은 결과가 나옴.
 
-<br><br>
+<br><br><br>
 
 # 🍓 데이터 제어어(DCL: Data Control Language)
