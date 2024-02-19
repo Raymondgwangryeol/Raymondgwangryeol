@@ -144,7 +144,7 @@ CREATE VIEW 뷰 이름[(속성명[, 속성명, ...])]
 AS SELECT문
 ```
 
-+)AS가 뭐예요
+**+) AS가 뭐예요**    
 1. 별칭(with SELECT 문)
 2. Table이나 속성 명을 다시 새롭게(?) 지정할 때. 다른 이름으로 저장 느낌임 -> SET이 이런 느낌이 좀 더 강하게 남
    
@@ -588,10 +588,96 @@ FROM 테이블명1 NATURAL JOIN 테이블명2
 SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
 FROM 테이블명1 JOIN 테이블명2 USING(속성명);
 ```
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/c43aa03f-77cb-4f2b-a3b0-611cf5bf02f8)
 
 #### [예제 1. EQUI JOIN]
 - <학생>테이블과 <학과> 테이블에서 '학과코드'값이 같은 튜플을 JOIN하여 '학번', '이름', '학과코드', '학과명'을 출력하는 SQL문을 작성하시오.
 ```sql
+/*[방법 1]*/
+SELECT 학번, 이름, 학생.학과코드, 학과명
+FROM 학생, 학과
+WHERE 학과.학생코드 = 학생.학과코드
+/*[방법 2]*/
+SELECT 학번, 이름, 학생.학과코트, 학과명
+FROM 학생 NATURAL JOIN 학과
+/*[방법 3]*/
 SELECT 학번, 이름, 학생.학과코드 학과명
 FROM 학생 JOIN 학과 USING(학과코드); /*학생에 학과를 JOIN해서 학생의 학과코드를 쓰나 봄!*/
 ```
+
+### INNER JOIN - NON-EQUI JOIN
+-JOIN 조건에 =조건 아닌 나머지 비교 연산자(>, <, <>, >=, <=)사용하는 JOIN 방법
+```sql
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1, 테이블명2, ...
+WHERE (NON-EQUI JOIN 조건);
+```
+
+
+#### [예제 1. NON-EQUI JOIN]
+- <학생>테이블과 <성적등급> 테이블을 JOIN하여 각 학생의 '학번', '이름', '성적', '등급'을 출력하는 SQL문을 작성하시오.
+```sql
+SELECT 학번, 이름, 성적, 등급
+FROM 학생, 성적등급
+WHERE (NON-EQUI JOIN 학생.성적 BETWEEN 성적등급.최저 AND 성적등급.최고); /*자꾸 최저.성적등급<=성적 AND 성적<=최고.성적등급 이런식으로 쓰네..*/
+```
+
+### OUTER JOIN
+- JOIN 조건에 만족하지 않는 튜플들도 싹 다 결과로 출력. 쓰읍 그냥 합집합 아니냐..?
+- LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN이 있음.
+
+### OUTER JOIN - LEFT OUTER JOIN
+- INNER JOIN후, 우측 항 릴레이션의 어떤 튜플과도 안 맞는 좌측 항 릴레이션 튜플들에 NULL값을 붙여 INNER JOIN 결과에 추가.(우측항을 기준으로 왼쪽 거를 갖다 붙임)
+```sql
+/*방법 1*/
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1 LEFT OUTER JOIN 테이블명2
+ON 테이블명1.속성명 = 테이블명2.속성명;
+
+/*방법 2*/
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1, 테이블명2
+WHERE 테이블명1.속성명 = 테이블명2.속성명(+);
+```
+
+### OUTER JOIN - RIGHT OUTER JOIN
+- INNER JOIN후, 좌측 항 릴레이션의 어떤 튜플과도 맍지 않는 우측 항 릴레이션의 튜플들에 NULL값을 붙여 INNER JOIN 결과에 추가.(좌측항을 기준으로 오른쪽 거를 갖다 붙임)
+```sql
+/*방법 1*/
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1 RIGHT OUTER JOIN 테이블명2
+ON 테이블명1.속성명 = 테이블명2.속성명;
+
+/*방법 2* - 이건 그냥 INNER JOIN이잖아../
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1, 테이블명2
+WHERE 테이블명1.속성명 = 테이블명2.속성명;
+```
+
+### OUTER JOIN - FULL OUTER JOIN
+- RIGHT INNER JOIN + LEFT INNER JOIN
+- INNER JOIN 후, JOIN 안 된 튜플들 싹 가져와서 NULL값으로 처리해 붙여버리기
+```sql
+SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
+FROM 테이블명1 FULL OUTER JOIN 테이블명2
+ON 테이블명1.속성명 = 테이블명2.속성명;
+```
+
+#### [예제 1. OUTER JOIN]
+- <학생>테이블과 <학과> 테이블에서 '학과코드'값이 같은 튜플을 JOIN하여 '학번', '이름', '학과코드', '학과명'을 검색하는 SQL문 작성하기.
+- 이때, '학과코드'가 입력되지 않은 학생도 출력하시오
+```sql
+/*방법 1*/
+SELECT 학번, 이름, 학과코드, 학과명
+FROM 학생 LEFT OUTER JOIN 학과
+ON 학생.학과코드 = 학과.학과코드;
+
+/*방법 2*/
+SELECT 학번, 이름, 학과코드, 학과명
+FROM 학생, 학과
+WHERE 학생.학과코드 = 학과.학과코드(+)
+```
+- JOIN 구문을 기준으로 테이블의 위치를 교환하여 RIGHT JOIN을 해도 같은 결과가 나옴.
+
+
+# 데이터 제어어(DCL: Data Control Language)
