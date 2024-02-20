@@ -5,7 +5,7 @@
 
 # 🍓 트랜잭션(Transaction)
 인가받지 않은 사용자로부터 데이터를 보장하기 위해, DBMS가 가져야 하는 특성, 하나의 논리적 기능을 정상적으로 수행하기 위한 <mark>작업의 기본 단위</mark>   
-👉 얘 함수같은 놈임.
+👉 프로시저보다 트랜잭션이 더 넓은 단위
 
 ## 🍊 트랜잭션 특성
 - 원자성(Atomicity): 트랜잭션 연산 다 성공 아님 실패 택 1 해야함. (부분만 결과 다르면 안 됨)
@@ -65,12 +65,12 @@ DB구축, 수정 목적으로 사용하는 언어
 - 도메인(Domain) - 구조체랑 비슷
   - 하나의 속성이 취할 수 있는 동일한 유형의 원자값들의 집합.
   - 특정 속성에서 사용할 데이터의 범위를 사용자가 정의하는 사용자 정의 데이터 타입
-      ```sql
+```sql
       
-      CREATE DOMAIN 도메인명 [AS 별명] 데이터 타입
-             [DEFAULT 기본값]
-             [CONSTRAINT 제약 조건 명 CHECK (범위값)]
-     ```
+CREATE DOMAIN 도메인명 [AS 별명] 데이터 타입
+      [DEFAULT 기본값]
+       [CONSTRAINT 제약 조건 명 CHECK (범위값)]
+```
 <br>
 
 ### 2) CREATE SCHEMA
@@ -591,7 +591,8 @@ SELECT * FROM 직원
 - 같은 값을 가지는 행을 연결하여 결과를 생성하는 방법.
 - = 비교시, 양쪽 다 훑기 때문에 동일한 놈이 2번 나오게 됨. 이 중복되는 친구들 중 한 명을 없애버리는 방법을 NATURAL JOIN이라고 함
 
-- 
+<br>
+
 **[WHERE절 이용한 EQUI JOIN]**
 ```sql
 SELECT [테이블명1.]속성명, [테이블명2.]속성명, ...
@@ -690,6 +691,7 @@ SELECT[테이블명1.]속성명, [테이블명2.]속성명, ...
 FROM 테이블명1 FULL OUTER JOIN 테이블명2
 ON 테이블명1.속성명 = 테이블명2.속성명;
 ```
+<br>
 
 #### ✏️[예제 1. OUTER JOIN]
 - <학생>테이블과 <학과> 테이블에서 '학과코드'값이 같은 튜플을 JOIN하여 '학번', '이름', '학과코드', '학과명'을 검색하는 SQL문 작성하기.
@@ -713,7 +715,8 @@ INSERT는 INTO랑 같이 써요
 ```sql
 INSERT INTO 테이블명([속성명1, 속성명2, ...])
 VALUES (데이터1, 데이터2, ...);
-```
+```   
+
 **[잠깐!]**   
 - 각 속성에 대응하는 데이터는 개수와 데이터 유형이 일치해야 함.
 - 기본 테이블에 모든 속성을 사용할 때는 속성명 생략 가능
@@ -739,6 +742,7 @@ SELECT 이름, 생일 주소, 기본급
 FROM 사원
 WHERE 부서='편집';
 ```
+<br><br>
 
 ## 🍊 DML - DELETE
 - DELETE는 FROM이랑 같이 써요
@@ -746,7 +750,7 @@ WHERE 부서='편집';
 DELETE
 FROM 테이블명
 [WHERE 조건];
-```
+```   
 **[잠깐!]**   
 - 모든 레코드를 삭제할 때 WHERE절 생략 가능
 - 모든 레코드 삭제해도 테이블 구조는 남아있음. 테이블 자체를 날리고 싶다면 DROP
@@ -756,7 +760,7 @@ FROM 테이블명
   ```sql
   DELETE
   FROM 사원
-  WHERE 이름="임꺽정";
+  WHERE 이름='임꺽정';
   ```
 #### ✏️[예제 2. DELETE]
 - <사원>테이블에서 '인터넷' 부서에 대한 모든 튜플을 삭제하시오
@@ -764,16 +768,38 @@ FROM 테이블명
 DELETE
 FROM 사원
 WHERE 부서 = '인터넷';
-
-#### **✏️[예제 3. DELETE]**
+```
+#### ✏️[예제 3. DELETE]
 - <사원>테이블에 있는 모든 튜플을 삭제하시오
 ```sql
 DELETE
 FROM 사원
 ```
+<br><br>
 
 ## 🍊 DML - UPDATE
+- 기본 테이블의 특정 튜플들의 내용을 변경
+- SET이랑 같이 써요
+```sql
+UPDATE 테이블명
+SET 속성명 = 데이터[, 속성명=데이터, ...]
+[WHERE 조건];
+```
+#### ✏️[예제 1. UPDATE]
+- <사원>테이블에서 '홍길동'의 주소를 '수색동'으로 수정하기
+```sql
+UPDATE 사원
+SET 주소 = '수색동'
+WHERE 이름='홍길동';
+```
 
+#### ✏️[예제 2. UPDATE]
+- <사원>테이블에서 '황진이'의 부서를 '기획부'로 변경, '기본급'을 5만원 인상하기
+```sql
+UPDATE 사원
+SET 부서 = '기획', 기본급=기본급+5
+WHERE 이름 = '황진이';
+```
 <br><br><br>
 
 # 🍓 데이터 제어어(DCL: Data Control Language)
@@ -787,4 +813,98 @@ FROM 사원
 |GRANT|데이터베이스 사용자 권한 부여|
 |REVOKE|데이터베이스 사용자 사용 권한 취소|
 
+**🥑 TIP**
+- GRANT(그온투)
+  - GRANT 권한 ON 테이블 TO 사용자
+- REVOKE
+  - REVOKE 권한 ON 테이블 FROM 사용자
+
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/ff87f03d-319a-4149-93b8-e5505dbd6699)
+
+#### ✏️[예제 1. COMMIT O]
+- <사원>테이블에서 '사원번호'가 40인 사원의 정보를 삭제한 후, COMMIT을 수정하시오
+```sql
+DELETE
+FROM 사원
+WHERE 사원번호 = 40;
+COMMIT;
+```
+- DELETE문 수행 후, COMMIT 명령을 수행했기 때문에, ROLLBACK으로 삭제한 데이터를 다시 되돌릴 수 없다
+<br>
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/df952e59-fe04-480c-b3a3-42b3bcfe3af6)
+
+#### ✏️[예제 2. COMMIT X]
+- <사원>테이블에서 '사원번호'가 30인 사원의 정보를 삭제하기
+```sql
+DELETE
+FROM 사원
+WHERE 사원번호 = 30;
+```
+- DELETE문 수행 후 COMMIT을 하지 않았으므로, DELETE로 삭제된 레코드는 이후 ROLLBACK으로 다시 되돌릴 수 있다
+<br>
+
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/8a3709a8-b6dc-49de-86c7-57a69537ceac)
+
+#### ✏️[예제 3-1. SAVEPOINT1]
+- SAVEPOINT 'S1'을 설정하고, '사원번호'가 20인 사원의 정보 삭제
+```sql
+SAVEPOINT S1
+DELETE FROM 사원 WHERE 사원번호 = 20
+```
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/f529276f-b84c-4768-8d3e-2a0105457ba2)
+
+#### ✏️[예제 3-2. SAVEPOINT2]
+- SAVEPOINT 'S2'을 설정하고, '사원번호'가 10인 사원의 정보 삭제
+```sql
+SAVEPOINT S2
+DELETE FROM 사원 WHERE 사원번호 =10
+```
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/2ddbcf85-b658-4dfb-a80b-50cd33244df1)
+
+#### ✏️[예제 3-3. ROLLBACK]
+- SAVEPOINT S1까지 ROLLBACK
+```sql
+ROLLBACK TO S1;
+```
+- 예제 3-1 수행 전으로 되돌려짐.
+<br>
+
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/5b902ea9-fefa-4215-8fd1-1b77e85bdd6c)
+
+#### ✏️[예제 3-4. ROLLBACK2]
+- 싹 다 ROLLBACK
+```sql
+ROLLBACK;
+```
+- DELETE 한 후 COMMIT해버린 부분 빼고 다 ROLLBACK
+<br>
+
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/b18dd7bf-6a86-4c77-acd5-80afcc5eb28c)
+
+<br><br><br>
+
+# 🍓 절차형 SQL(Procedural SQL)
+- SQL 언어에서도 절차 지향적인 프로그래밍 가능하도록 하는 트랜잭션 언어
+
+## 🍊 Procedure
+- 절차형 SQL을 활용해 특정 기능을 수행하는 일종의 트랜잭션 언어.
+- 서버단에 저장되는 SQL 쿼리들을 함수마냥 쓰려고 묶어놓은 것
+- 스템의 일일 마감 작업, 일괄 작업 등에 주로 사용
+
+- 구성도
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/f569e445-6cae-4ebd-b54d-37c20d312a60)
+
+
+- DECLARE(필수): 선언부. 프로시저의 명칭, 병수, 인수, 테이터 타입을 정의
+- BEGIN/ END(필수): 프로시저의 시작과 종료
+- CONTROL: 조건문 혹은 반복문이 삽입되어 순차 처리됨.
+- SQL: DML, DCL이 삽입되어 데이터 관리를 위한 조회, 추가, 수정, 삭제 작업을 수행
+- EXCEPTION: BIGIN ~ END 구문 실행 시 예외 처리할 방법 정의
+- TRANSACTION: 수행된 데이터 작업들을 DB에 적용할지, 취소할지 결정
+
+## 🍊 사용자 정의 함수(User-Defined Function)
+- SQL 처리 수행후, 수행 결과를 단일 값으로 반환할 수 있는 절차형 SQL
+
+- 구성도
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/884b4a10-9992-4c7b-8391-53c2393b0ff8)
 
