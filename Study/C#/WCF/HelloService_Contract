@@ -16,7 +16,7 @@ namespace HellowWorldService
     [ServiceContract] // System.ServiceModel 네임스페이스의 ServiceContract 속성을 인터페이스에 명시해야 계약이 선언된다.
     public interface IHelloWorld
     {
-        [OperationContract]// 서비스 내에 사용될 메소드를 명시. 해당 특성이 명시되지 않은 메소듸의 경우, WCF는 해당 메소드를 계약의 일부로 생각하지 않음.
+        [OperationContract]// 서비스 내에 사용될 메소드를 명시. 해당 특성이 명시되지 않은 메소드의 경우, WCF는 해당 메소드를 계약의 일부로 생각하지 않음.
         string SayHello();
     }
     public class HelloWorldWCFService : IHelloWorld
