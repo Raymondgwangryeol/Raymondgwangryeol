@@ -66,8 +66,8 @@ namespace Client
             //A factory that creates channels of different types that are used by clients to send messages to variously configured service endpoints.
             ChannelFactory<IHelloWorld> factory = //IHelloWorld 타입의 채널을 선언한다
                 new ChannelFactory<IHelloWorld>(endPoint);
-            IHelloWorld proxy = factory.CreateChannel(); //이걸 IHelloWorld 객체에 집어넣네..?
-                                                         // 이거 proxy라는 IHelloWorld 객체를 오버라이딩한 거라고 생각하면 되는 것 같은데.. 정확하진 않음.
+            IHelloWorld proxy = factory.CreateChannel(); //서비스의 계약 인터페이스를 타입 매개변수로 취하여 wcf의 내부 채널들을 구성하고,
+                                                         // 이 채널들을 대표하는 프록시 객체를 생성하여 반환해 주는 역할을 한다.
              
             //proxy란 대리자라는 뜻으로, 인터넷 통신 시 빠른 엑세스나 안전한 통신 등을 확보하기 위한 중계 서버를 말함.
             //End-Point가 클라이언트의 프론트 프록시라고 할 수 있음.
