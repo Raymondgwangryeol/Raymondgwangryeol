@@ -821,8 +821,7 @@ WHERE 이름 = '황진이';
   - REVOKE 권한 ON 테이블 FROM 사용자
 
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/ff87f03d-319a-4149-93b8-e5505dbd6699)
-
-#### ✏️[예제 1. COMMIT O]
+#### ✏️[예제 1. COMMIT ⭕]
 - <사원>테이블에서 '사원번호'가 40인 사원의 정보를 삭제한 후, COMMIT을 수정하시오
 ```sql
 DELETE
@@ -832,9 +831,10 @@ COMMIT;
 ```
 - DELETE문 수행 후, COMMIT 명령을 수행했기 때문에, ROLLBACK으로 삭제한 데이터를 다시 되돌릴 수 없다
 <br>
+
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/df952e59-fe04-480c-b3a3-42b3bcfe3af6)
 
-#### ✏️[예제 2. COMMIT X]
+#### ✏️[예제 2. COMMIT ✖️]
 - <사원>테이블에서 '사원번호'가 30인 사원의 정보를 삭제하기
 ```sql
 DELETE
@@ -889,42 +889,42 @@ SQL 언어에서도 절차 지향적인 프로그래밍 가능하도록 하는 �
 <br><br>
 
 ## 🍊 Procedure
-- 절차형 SQL을 활용해 특정 기능을 수행하는 일종의 트랜잭션 언어.
-- 서버단에 저장되는 SQL 쿼리들을 함수마냥 쓰려고 묶어놓은 것
-- 스템의 일일 마감 작업, 일괄 작업 등에 주로 사용    
+✔️ 절차형 SQL을 활용해 특정 기능을 수행하는 일종의 트랜잭션 언어.   
+✔️ 서버단에 저장되는 SQL 쿼리들을 함수마냥 쓰려고 묶어놓은 것    
+✔️ 스템의 일일 마감 작업, 일괄 작업 등에 주로 사용       
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **[구성도]**   
 <br>
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/f569e445-6cae-4ebd-b54d-37c20d312a60)
 
 
-- DECLARE(필수): 선언부. 프로시저의 명칭, 병수, 인수, 테이터 타입을 정의
-- BEGIN/ END(필수): 프로시저의 시작과 종료
-- CONTROL: 조건문 혹은 반복문이 삽입되어 순차 처리됨.
-- SQL: DML, DCL이 삽입되어 데이터 관리를 위한 조회, 추가, 수정, 삭제 작업을 수행
-- EXCEPTION: BIGIN ~ END 구문 실행 시 예외 처리할 방법 정의
-- TRANSACTION: 수행된 데이터 작업들을 DB에 적용할지, 취소할지 결정
+- **DECLARE(필수)**: 선언부. 프로시저의 명칭, 병수, 인수, 테이터 타입을 정의
+- **BEGIN/ END(필수)**: 프로시저의 시작과 종료
+- **CONTROL**: 조건문 혹은 반복문이 삽입되어 순차 처리됨.
+- **SQL**: DML, DCL이 삽입되어 데이터 관리를 위한 조회, 추가, 수정, 삭제 작업을 수행
+- **EXCEPTION**: BIGIN ~ END 구문 실행 시 예외 처리할 방법 정의
+- **TRANSACTION**: 수행된 데이터 작업들을 DB에 적용할지, 취소할지 결정
 <br>
 
 ## 🍊 사용자 정의 함수(User-Defined Function)
-- SQL 처리 수행후, 수행 결과를 단일 값으로 반환할 수 있는 절차형 SQL   
+✔️ SQL 처리 수행후, 수행 결과를 단일 값으로 반환할 수 있는 절차형 SQL   
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  **[구성도]**   
 <br>
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/884b4a10-9992-4c7b-8391-53c2393b0ff8)
 
-- DECLARE(필수): 선언부. 사용자 정의 함수의 명칭, 변수 및 상수, 데이터 타입 정의
-- BEGIN/END(필수): 사용자 정의 함수의 시작과 종료
-- CONTROL: 조건문 혹은 반복문이 삽입되어 순차 처리됨.
-- SQL: SELECT문이 삽입되어 데이터 조회 작업을 수행.
-- EXCEPTION: BIGIN ~ END 구문 실행 시 예외 처리할 방법 정의
-- RETURN(필수): 호출 프로그램에 반환할 값이나 변수를 정의
+- **DECLARE(필수)**: 선언부. 사용자 정의 함수의 명칭, 변수 및 상수, 데이터 타입 정의
+- **BEGIN/END(필수)**: 사용자 정의 함수의 시작과 종료
+- **CONTROL**: 조건문 혹은 반복문이 삽입되어 순차 처리됨.
+- **SQL**: SELECT문이 삽입되어 데이터 조회 작업을 수행.
+- **EXCEPTION**: BIGIN ~ END 구문 실행 시 예외 처리할 방법 정의
+- **RETURN(필수)**: 호출 프로그램에 반환할 값이나 변수를 정의
 <br>
 
 ## 🍊 Trriger
-데이터베이스 시스템에서 삽입, 갱신, 삭제 등의 이벤트가 발생할 때마다 관련 작업이 자동으로 수행되는 절차형 SQL   
-데이터 변경 및 무결성 유지 로그 메시지 출력 등의 목적으로 사용.    
-트리거에 오류가 있는 경우 트리거가 처리하는 데이터에도 영향을 미침      
+✔️ 데이터베이스 시스템에서 삽입, 갱신, 삭제 등의 이벤트가 발생할 때마다 관련 작업이 자동으로 수행되는 절차형 SQL   
+✔️ 데이터 변경 및 무결성 유지 로그 메시지 출력 등의 목적으로 사용.    
+✔️ 트리거에 오류가 있는 경우 트리거가 처리하는 데이터에도 영향을 미침      
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **[구성도]**   
 <br>
