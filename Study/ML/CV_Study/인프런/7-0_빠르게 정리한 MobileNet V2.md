@@ -59,12 +59,12 @@ MobileNet V2에서는 이와 반대로 expension을 먼저 함
 - stride가 1일 때만 residual connection이 있음.
 
 ## **Parameter count for bottleneck convolution**
-가로: h
-세로: w
-expansion factor: t
-커널 크기: k
-input channel 크기: d'
-output channel 크기: d"
+가로: h   
+세로: w   
+expansion factor: t   
+커널 크기: k   
+input channel 크기: d'   
+output channel 크기: d"   
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/37002a05-a670-4966-a52c-168b9e354b03)     
 MobileNet V1보다 연산량이 많이보일 수 있지만, 실제로는 더 적은 채널 수로 학습 할 수 있기 때문에, 연산량이 더 적다.
 
