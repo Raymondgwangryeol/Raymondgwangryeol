@@ -6,6 +6,9 @@
 </ul>
 <br>
 
+<img src='https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white'>
+
+<!--[![Solved.ac프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj=hcc9876)](https://solved.ac/hcc9876)-->
 
 <!--
 **Raymondgwangryeol/Raymondgwangryeol** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
