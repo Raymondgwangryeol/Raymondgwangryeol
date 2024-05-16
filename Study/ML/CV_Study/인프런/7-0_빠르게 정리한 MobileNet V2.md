@@ -53,7 +53,7 @@ MobileNet V2에서는 이와 반대로 expansion을 먼저 함
     - Linear feature를 가져오기 위해서 일부러 붙이지 않음.
     - ReLU와 같은 non-linear 함수를 붙이는 게 다른 feature map으로 transform시 정보가 유지되지 않는 경우가 있었음. (rank나 dimension manifolds)
     - 정보 유지를 위해서는 채널의 차원이 보장 되어야 함.
-- 중간에 채널을 얼마나 키울 건지 결정하는 t(expension factor)값은 6으로 진행됐고, 논문에서는 5에서 10정도가 적당하다고 언급.
+- 중간에 채널을 얼마나 키울 건지 결정하는 t(expansion factor)값은 6으로 진행됐고, 논문에서는 5에서 10정도가 적당하다고 언급.
  <br> <br>
  ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/8e6ad7a6-2b27-4394-b4a6-f73c44eadcc6)
 - stride가 1일 때만 residual connection이 있음.
