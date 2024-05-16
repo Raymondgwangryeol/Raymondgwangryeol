@@ -1,5 +1,5 @@
     참고 자료 & 슬라이드: https://www.youtube.com/watch?v=JuEeRdRG_2E
-# MobileNets  v1
+# MobileNet V1
 - 모바일 또는 임베디드 기기와 같은 소형 컴퓨터에 적합하도록 디자인 된 딥러닝 모델   
 - 최대한 성능을 보존하면서 컴퓨팅 속도를 빠르게 함을 목표  
 - 정확성 보다는 효율성(Efficiency) 관점     
