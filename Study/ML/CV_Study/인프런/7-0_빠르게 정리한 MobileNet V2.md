@@ -86,7 +86,7 @@ Memory Operation이 일어나는 두 layer들이 narrow하기 때문에, mobile 
 The total amount of memory would be dominated by the size of bottleneck tensors.
 
 ## **Bottleneck Residual Block**
-Expension을 한 번에 다 하지 말고, 채널을 몇 묶음씩 나눠서 보내면 메모리 사용량을 줄일 수 있다.   
+Expansion을 한 번에 다 하지 말고, 채널을 몇 묶음씩 나눠서 보내면 메모리 사용량을 줄일 수 있다.   
 너무 잘게 자르면 cache miss가 발생해서 오히려 성능이 떨어질 수 있음.
 2에서 5정도가 좋다고 언급.
 
