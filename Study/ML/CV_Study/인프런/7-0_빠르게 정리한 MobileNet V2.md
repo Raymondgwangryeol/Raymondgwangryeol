@@ -33,7 +33,7 @@ ResNet의 Residual Block은
                                                                                       다시 더해져야 하기 때문    
 <br><br><br>
 
-MobileNet V2에서는 이와 반대로 expension을 먼저 함   
+MobileNet V2에서는 이와 반대로 expansion을 먼저 함   
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/c54a69ed-4264-4b68-b338-f5c4b52574bd)   
 
              narrow                →                wide                 →              narrow approch   
@@ -46,7 +46,7 @@ MobileNet V2에서는 이와 반대로 expension을 먼저 함
 <br><br><br>
 
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/4a982d62-9c0a-40f3-b40a-aabc6fd5a478)   
-- 충분한 channel의 수를 확보 하기 위해 처음에 expension 수행
+- 충분한 channel의 수를 확보 하기 위해 처음에 expansion 수행
 - 마지막 layer는 linear bottleneck layer
   - 채널 수 줄임(Projection)
   - ReLU가 안 붙어 있음
