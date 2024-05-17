@@ -80,8 +80,6 @@ s2는 stride=2라는 뜻
 
 마지막으로 average pooling, fully connected layer를 거치고 softmax로 classification
 
-![스크린샷 2024-05-12 205940](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/24e6d28e-3aff-40dd-912f-fd6eb2c1b674)   
-
 ## 성능 분석
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/feeb0b34-256e-46fa-8c7b-96d4db3b5a76)     
 
