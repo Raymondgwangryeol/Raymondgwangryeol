@@ -78,3 +78,38 @@ Parameter를 정해놓고 튜닝을 해 나가야 하기 때문에 bottleneck st
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/9544263e-3143-47b8-8b7a-69ecc3c8eff2)   
   - Target latency에 도달할 때 까지 반복   
 
+## MobileNet V3 - Network Improvements
+### Redesigning Expensive Layers
+- Expensive한 layer들이 Network의 처음과 끝 부분에 있음     
+- MobileNet V2의 inverted bottleneck 구조를 변경     
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/4cec895a-4750-4502-99ea-26bd06ec9a54)
+- Projection and filtering layer부분 (3X3 Conv, 1X1 Conv 부분)이 더 이상 필요가 없었다
+- 대신 Average Pool을 앞쪽에 끌어다 놓았더니 더 효율적이었음.
+
+#### The inital set of filters
+원래는 32filter를 3X3 Conv full 연산 해서 사용했는데, 이를 절반으로 줄인 16개의 filter를 사용. ReLU와 Swish 함수를 썼더니 필터를 32개 썼을 때와 동일한 Accuracy가 나옴.   
+(원래는 nonlinearities로 ReLU만 사용했음)
+
+#### Swish 함수(Nonlinearities)
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/a8bf0450-dea8-4588-afdf-249d2741b28b)   
+Swish 함수는 x에 시그모이드를 곱한 형태를 가지고 있는데, 모바일 디바이스에서 시그모이드 함수를 연산하기에는 expensive하다.      
+h-swish(hard)는 sigmoid 함수를 사용하지 않으면서, sigmoid와 거의 비슷한 모양의 그래프를 가짐.    
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/1c0f2d5e-015c-4aba-ab28-63e7bdc4dca5)    
+
+sigmoid 대신 계산하기 쉬운 ReLU를 사용.     
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/2c2d5021-fa25-4b3c-a1d5-daab3f836d43)     
+h-swish 함수를 썼을 때 모바일 디바이스에서도 잘 돌아갔고, 정확도도 높았음.     
+
+원래는 다 ReLU를 썼었는데, 그 중 모델의 절반을 h-swish로 대체함.     
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/cb343fe0-9c81-4ca0-aafb-7b286c7a6c57)
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/f68bc214-2576-40b9-a31a-c25d7a7a1d1e)
+    
+
+### Large squeeze-and-excite
+MNASNet에서는 squeeze-and-excite bottleneck의 size가 Convolutional bottleneck size와 연관이 있었는데, size를 고정된 수인 expension layer 채널의 1/4에 해당하는 값으로 고정함.     
+Accuracy 증가, 적당한 파라미터 증가, 별 차이 없는 latency cost 기록
+
+### MobileNet V3 Definitions
+- Large/Small
+- high/low resoure를 타겟팅
+- trade-off가 있는 inference와 accuracy에 대해 벤치마킹을 하기 위함.
