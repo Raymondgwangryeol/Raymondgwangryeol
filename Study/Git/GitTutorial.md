@@ -15,7 +15,7 @@ Git과 같은 버전 제어 시스템을 쓰면 쉽게 할 수 있는 작업들<
 </br></br></br>
 
 ## Git의 구성 요소 3가지
-<img src="https://nulab.com/static/134fb800f3082b1907b07e5249744360/5a190/01.png"/>
+<img src="https://nulab.com/static/1736ed1f6051c5c22605cb706d3bc08e/5a190/01.png"/>
 
 **- 저장소(Repository)**:
 </br>
@@ -38,7 +38,7 @@ Git과 같은 버전 제어 시스템을 쓰면 쉽게 할 수 있는 작업들<
 3. 변경 사항 commit(commit하면 Staging Area에서 파일을 가져와서, 스냅샷으로 저장소에 저장함.)</br>
 &emsp;                 :bookmark_tabs: 스냅샷 : 사진 찍는것 처럼 특정 시점에 스토리지의 파일시스템을 순간포착해서 별도의 이미자나 파일로 저장하는 것.</br>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;장애나 data 손상시, 스냅샷 생성 시점으로 복구할 수 있다
-<img src="https://nulab.com/static/f4e393df06c82d4fd600c18081507b35/5a190/02.png"/>
+<img src="https://nulab.com/static/d13cdc1344230f603d17b31a5cbd1dae/5a190/02.png"/>
 </br></br></br>
 
 ## Git 파일의 3가지 상태
@@ -126,7 +126,7 @@ HEAD는 현재 commit을 가리키는 포인터.</br>
 2. --mixed(기본): HEAD가 가리키고 있는 스냅샷을 인덱스에 업데이트(Index만 변경)
 3. --hard: Working directory를 Index의 상태로 업데이트 (Index, Worktree 둘 다 변경)
 </br>
-<image src="https://nulab.com/static/d3d319a98c48b1ce04570d547a6b0d84/5a190/03.png"/>
+<image src="https://nulab.com/static/925a1cd132fedda88283db1110772810/5a190/03.png"/>
 </br></br></br>
 
 ## 저장소 동기화
