@@ -65,7 +65,7 @@
 
 ## **1-3. Ways of Lossy/Lossless Compression Algorithnm**
 ### **✔Lossy Compression**
-**RGB to YCrCb → 다운샘플링 → DCT(이산 코사인 변환) → 양자화 → 스캐닝 → 허프만 코딩**  
+**RGB to YCrCb → 다운샘플링 → DCT(이산 코사인 변환) → 양자화 → 지그재그 스캐닝 → 허프만 코딩**  
 <br>
 
 **1. RGB to YCrCb**
@@ -99,7 +99,7 @@
 - DCT 수행하면 좌측 상단에 저주파 성분이, 우측 하단에 고주파 성분이 배치되게 됨.
 <br>
 
-**5. 스캐닝**    
+**5. 지그재그 스캐닝**    
 ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/eed8c18e-297c-403e-8436-9f31fef0b424)
 
 - 2차원 배열에 담겨있는 주파수 계수를 지그재그 순서로 읽어 1차원 벡터 형태로 변환
