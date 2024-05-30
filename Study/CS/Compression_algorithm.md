@@ -2,9 +2,12 @@
         - https://dydtjr1128.github.io/image/2019/07/01/Image-compression.html
         - https://woonys.tistory.com/188
         - https://namhoon.kim/2022/08/02/cs_introduction/008/
+        - https://mvje.tistory.com/86
+        - https://m.blog.naver.com/grtwow9/20197052486
         시각 자료
         - https://woonys.tistory.com/188
         - https://velog.io/@hygoogi/DCT-%EB%B3%80%ED%99%98-%EC%8B%A4%EC%8A%B5-s1k66r4mp8
+        - https://sketchofcreed.tistory.com/1
 # **1. Image compression**
 
 ## **1-1. Intro**
@@ -196,13 +199,63 @@
   - 한 번 사전에 입력된 정보는 꺼내 쓰면 되기 때문에 정보량이 작음.
  <br><br><br><br><br>
 
- # **2. String Compression**
- ### 2-1. RLE(Run-length encoding)
+ # **2. Video Compression - MPEG**
+ ## 2-1. Intro
+ - MPEG(Moving Picture Experts Group)
+   - ISO 및 IEC 산하에서 비디오와 오디오 등 멀티미디어 표준 개발을 담당하는 소규모 그룹
+   - 현재 가낭 널리 쓰이는 비디오 압축 규격
+## 2-2. Type of MPEG
+### ✔MPEG-1
+- 최초의 비디오/오디오 표준. CD에 동영상을 담기 위해 사용
+- CD-ROM 속도에 맞춰 최대 1.5Mbps의 전송률을 지원, 표준 해상도는 352X240(30fps)
+- CD 한 장에 74분의 영상을 담을 수 있으며, 2채널 Stereo를 지원
+- MP3 오디오 압축 포맷이 해당 표준에 포함.(MPEG1의 Layer 3이 떨어져 나온 것)
+### ✔MPEG-2
+- 방송용 DVD, HDTV에 사용됨.
+- 4Mbps 이상의 전송률, Full HD 해상도 구현 가능.
+- 5.1채널 입체 음향 지원
+### ✔MPEG-4
+- 현재 가장 많이 쓰이는 압축 기술
+- 웹, 모바일 환경에서 사용.
+- 유튜브 등 인터넷에 업로드 되는 영상은 거의 이 방식을 사용.
+- 24Kbps ~ 2Mbps의 낮은 전송 속도, 높은 압축률(.mp4)
+### ✔MPEG-7
+- 주로 멀티미디어 정보 검색에 사용되는 압축 표준
+- 데이터 검색을 용이하게 하기 위해 만들어짐.
+  - 키워드로 동영상을 검색하는 등 다양한 분야에서 사용 가능.
+## 2-3. Compression principle of MPEG
+- 프레임 단위의 압축과 프레임 간의 연관성을 이용.
+- 이전 프레임과 현재 프레임의 차로 객체의 움직임을 추정하고 이를 보상.
+- 비디오 시퀀스가 가지는 시간축 상의 중복을 없애기 위한 **Motion Compression** 적용
+  - **Motion Compression의 3가지 Frame**
+    ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/2885f22e-7e98-4495-a9f0-5065836dcb7b)
+
+    - **I-Frame(Key Frame)**
+      - 자신의 현재 정보만(단일 프레임) 압축.(JPEG 압축 방식과 유사)
+      - 원본 소스에 가장 근접, 화질 뛰어남. 용량이 큼.
+      - 배경과 Object의 데이터를 가진 유일한 Frame 유형
+      - 데이터 스트림의 어느 위치에도 올 수 있기 때문에, I-Frame으로 인해 Random access가 가능
+    - **P-Frame**
+      - 가장 가까운 이전 프레임(순방향 예측)으로 부터 움직임 예측 후, 나머지 차이 부분을 DCT 변환하여 압축
+      - 과거 프레임으로 부터 예측하기 때문에 이전 프레임에 대한 의존도가 높음
+    - **B-Frame**
+      - 자신의 현재 이미지를 기준으로, 이전 프레임 뿐 아니라 이후 프레임도 참고하여(양방향 예측) 압축
+      - 화질 가장 떨어짐, 용량이 작고 압축률 가장 높음
+      - 이전, 이후 프레임에 대한 의존도가 높음.
+ - **GOP(Group of Pictures)**
+   ![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/f8605647-3ccc-496c-95aa-fa3876d99aa8)
+
+   - MPEG의 압축 단위. 현재 I-Frame에서 다음 I-Frame까지의 개별 시퀀스 프레임 개수를 의미함.
+   - 역방향 재생 시 Key Frame인 I-Frame을 찾기 힘들 경우, 기준이 없어 복원이 불가능하고, 동영상의 한 지점에 Random Access할 때 빠르게 해당 시점의 프레임을 복원해야함. 이를 위해 GOP 구조가 추가됨.
+   - 때문에 GOP내에 반드시 I-Frame이 포함되어야 하며, GOP 앞부분에 시퀀스 헤더를 붙여 Random Access시 해당 헤더위 위치를 확인하고, GOP 내의 I-Frame을 참조하여 영상 복원.
+ <br><br><br><br><br>
+ # **3. String Compression**
+ ### 3-1. RLE(Run-length encoding)
  - 문자열을 문자와 반복 횟수로 표현하는 방법.
    - ex) AAAAAAABBCCCDEEEEFFFFFFG
      - RLE 적용: A7B2C3D1E4F6G1
 <br>
 
-### 2-2. 허프만 코딩(Huffman coding)
+### 3-2. 허프만 코딩(Huffman coding)
 - 위에 기술한 내용과 동일.
  
