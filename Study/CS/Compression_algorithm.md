@@ -64,7 +64,7 @@
 <br><br>
 
 ## **1-3. Ways of Lossy/Lossless Compression Algorithnm**
-### **✔Lossy Compression**
+### **✔Lossy Compression - JPEG**
 **RGB to YCrCb → 다운샘플링 → DCT(이산 코사인 변환) → 양자화 → 지그재그 스캐닝 → 허프만 코딩**  
 <br>
 
