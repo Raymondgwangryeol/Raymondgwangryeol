@@ -57,7 +57,7 @@ class ModelParallelResNet50(ResNet):
 <br>
 
 PyTorch에서는 두 가지 방식의 Data parallel을 제공.
-- DataParallel
+- **DataParallel**
   - 단순히 데이터를 분배한 후 평균을 취함.
   - GPU 사용 불균형 문제 발생(하나의 GPU에 할 일을 전가 -> GPU 폭발)
   - 해당 GPU에 맞춰서 Batch Size 감소, 중간에 Coordinate하는 GPU가 많은 메모리를 차지하기 때문에 한 GPU가 병목, 데이터 분산 불균형 발생, GIL
@@ -69,7 +69,9 @@ PyTorch에서는 두 가지 방식의 Data parallel을 제공.
 ```python
 parallel_model = torch.nn.DataParallel(model)
 ```
-- DistributeDataParallel
+<br>
+
+- **DistributeDataParallel**
   - **❓퀴즈** 각 CPU마다 Process 생성하여 개별 GPU에 할당
     - 모으지 않아도 각자 Coordinate 가능. 따로 처리 후 나중에 평균치를 반영하는 방식.
 ```python
