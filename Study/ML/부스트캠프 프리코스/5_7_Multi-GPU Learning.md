@@ -16,6 +16,9 @@
 
 ## **Multi-GPU 학습의 방법**
 모델 나누기(병렬화), 데이터 나누기
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/87c1a333-ebc2-484d-a6e6-f3422bc06939)
+<br>
+
 ### **Model parallel**
 **❓퀴즈**    
 다중 GPU에 학습을 분산하는 2가지 방법 중, 모델을 나누는 방식은 무엇이라 불리는가?    
@@ -24,6 +27,8 @@
 - 모델의 병목, 파이프라인의 어려움 등으로 인해 모델 병렬화는 고난이도 과제
 
 ### **Model parallel의 어려움**
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/2b7cadb7-6310-4299-9e75-e30e56dd8f4e)
+<br>
 
 ```python
 class ModelParallelResNet50(ResNet):
@@ -48,6 +53,8 @@ class ModelParallelResNet50(ResNet):
 - 데이터를 나눠 GPU에 할당 후 결과의 평균을 취하는 방법.
 - Minibatch와 유사, 한 번에 여러 GPU에서 수행
   - Minibatch의 병렬화를 시킨다고 이해하면 편하다.
+![image](https://github.com/Raymondgwangryeol/Raymondgwangryeol/assets/32587541/b8eb04d7-ace8-4649-a2df-9bb86f06903e)
+<br>
 
 PyTorch에서는 두 가지 방식의 Data parallel을 제공.
 - DataParallel
