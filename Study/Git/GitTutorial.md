@@ -111,7 +111,8 @@ git commit 명령어로 저장소의 Git 기록에 변경 내용을 기록할 �
 이전 커밋을 취소. 변경 사항을 실행 취소하는 가장 일반적인 방법이다.</br>
 커밋을 취소한다고 해서 커밋을 제거하거나, 저장소 수정을 하지 않고, 아예 변경사항을 되돌리는 새로운 커밋을 만들어버림. 기록을 보관하면서 git 저장소의 변경사항을 유지할 수 있음.</br>
 git reset이나 git rebase - i를 써서 아예 커밋을 삭제할 수도 있지만, 원격 저장소랑 다른 팀원들의 로컬 저장소랑 구조가 다를 수 있기 때문에, 일반적으로 권장되지 않음.</br></br>
-<img src="https://nulab.com/static/d4c010b3dbd1895bf9f63cd5ee63daf9/5a190/01.png"/>
+![image](https://github.com/user-attachments/assets/9075f321-d36f-47e5-b499-bdfcef506f1b)
+
 </br></br>
 
 ### 커밋 제거 - git reset
@@ -344,7 +345,8 @@ HEAD가 특정 스냅샷을 가리키면, 해당 스냅샷이 속한 브랜치�
 로그를 취소하거나 삭제하는 등 커밋 참조할 때 HEAD의 상대참조 기호인 ~,^를 써서 범위를 정한다.</br>
 **~num:** HEAD제외 해당 branch의 이전으로 num만큼 이동</br>
 **^num:** 한 번에 한 개의 조상만을 나타내며, 부모가 여러개일 경우 num번째 부모를 나타냄.</br>
-<img src="https://nulab.com/static/1404d5e978b6e8dcb86d4a8c544fc414/5a190/01.png">
+![image](https://github.com/user-attachments/assets/6d04dcf6-5743-4874-a37e-cf2d27a3b7a8)
+
 </br></br>
 
 ### 브랜치 보관
