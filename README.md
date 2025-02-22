@@ -15,7 +15,7 @@
   <br><br>
   <b>🏋️‍♀️Activities</b>
   <br>
-  &nbsp&nbspBoostcamp AI Tech, 7th Cohort (2024.08 ~ 2025.02)
+  &nbsp&nbspBoostcamp AI Tech, 7th Cohort, CV Track (2024.08 ~ 2025.02)
 </ul>
 <br>
 
