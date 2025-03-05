@@ -1,12 +1,5 @@
-def divisor(yellow):
-    divisors = []
-    for i in range(1, int(yellow**0.5) + 1):
-        if yellow % i == 0:
-            divisors.append((yellow // i, i))
-    return divisors
-
-def solution(brown, yellow):
-    divisors = divisor(yellow)
-    for n, m in divisors:
-        if 2 * n + 2 * m + 4 == brown:
-            return [n + 2, m + 2]
+def solution(brown, red):
+    for i in range(1, int(red**(1/2))+1):
+        if red % i == 0:
+            if 2*(i + red//i) == brown-4:
+                return [red//i+2, i+2]
