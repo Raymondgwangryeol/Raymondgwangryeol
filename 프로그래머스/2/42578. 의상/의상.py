@@ -1,11 +1,8 @@
-from collections import defaultdict
+from collections import Counter
 
 def solution(clothes):
-    dict_clothes = defaultdict(list)
-    for name, category in clothes:
-        dict_clothes[category].append(name)
+    dict_clothes = Counter([category for name, category in clothes])
     mul=1
     for category in dict_clothes:
-        l=len(dict_clothes[category])
-        mul*=(l+1)
+        mul*=(dict_clothes[category]+1)
     return mul-1
